@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eid Salami Link Generator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Hind Siliguri',sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#020024,#090979,#00d4ff);
+
+min-height:100vh;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+padding:15px;
+
+color:white;
+
+}
+
+.container{
+
+width:100%;
+max-width:420px;
+
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+
+border-radius:20px;
+
+padding:20px;
+
+text-align:center;
+
+box-shadow:0 0 25px rgba(0,0,0,0.4);
+
+}
+
+.title{
+
+font-size:26px;
+color:#FFD700;
+margin-bottom:10px;
+
+}
+
+input,select,textarea{
+
+width:100%;
+
+padding:12px;
+
+margin:8px 0;
+
+border:none;
+
+border-radius:10px;
+
+font-size:15px;
+
+}
+
+textarea{
+
+min-height:70px;
+
+}
+
+button{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#FFD700;
+
+color:black;
+
+font-weight:700;
+
+font-size:15px;
+
+cursor:pointer;
+
+margin-top:10px;
+
+}
+
+.shareBtn{
+
+background:#25D366;
+
+color:white;
+
+}
+
+.copyBtn{
+
+background:#ff9800;
+
+color:white;
+
+}
+
+.messengerBtn{
+
+background:#0084FF;
+
+color:white;
+
+}
+
+.numberCard{
+
+margin:20px 0;
+
+background:rgba(255,255,255,0.12);
+
+padding:15px;
+
+border-radius:15px;
+
+font-size:18px;
+
+}
+
+.linkbox{
+
+margin-top:20px;
+
+background:#00000070;
+
+padding:12px;
+
+border-radius:10px;
+
+word-break:break-all;
+
+font-size:14px;
+
+}
+
+.adbox{
+
+margin-top:20px;
+
+background:#ffffff10;
+
+padding:10px;
+
+border-radius:10px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+
+<div class="title">🌙 Eid Salami Link</div>
+
+<p>নিজের Eid Salami Link তৈরি করুন</p>
+
+<input id="name" placeholder="আপনার নাম">
+
+<select id="method">
+
+<option value="bKash Personal">bKash Personal</option>
+<option value="Nagad Personal">Nagad Personal</option>
+
+</select>
+
+<input id="number" placeholder="bKash / Nagad নাম্বার">
+
+<select id="message">
+
+<option value="ঈদ মোবারক! সালামি পাঠাতে ভুলবেন না 😁">
+ঈদ মোবারক! সালামি পাঠাতে ভুলবেন না 😁
+</option>
+
+<option value="আজ ঈদ! সালামি না দিলে বন্ধুত্ব শেষ 😜">
+আজ ঈদ! সালামি না দিলে বন্ধুত্ব শেষ 😜
+</option>
+
+<option value="ঈদের খুশি দ্বিগুণ হবে যদি সালামি পাঠান 🥳">
+ঈদের খুশি দ্বিগুণ হবে যদি সালামি পাঠান 🥳
+</option>
+
+</select>
+
+<textarea id="custom" placeholder="নিজের Eid message লিখুন"></textarea>
+
+<button onclick="generate()">🎉 লিংক তৈরি করুন</button>
+
+<div id="result"></div>
+
+<div class="adbox">
+
+<!-- Ads Here -->
+
+<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
+
+</div>
+
+</div>
+
+<script>
+
+let generatedLink="";
+
+function generate(){
+
+let name=document.getElementById("name").value;
+let method=document.getElementById("method").value;
+let number=document.getElementById("number").value;
+let msg=document.getElementById("custom").value;
+
+if(msg==""){
+msg=document.getElementById("message").value;
+}
+
+let data=btoa(name+"|"+method+"|"+number+"|"+msg);
+
+generatedLink=location.href.split("?")[0]+"?data="+data;
+
+document.getElementById("result").innerHTML=
+
+`
+
+<div class="linkbox">
+
+আপনার Eid Salami Link
+
+<br><br>
+
+${generatedLink}
+
+</div>
+
+<button class="copyBtn" onclick="copyLink()">📋 Copy Link</button>
+
+<button class="shareBtn" onclick="shareWhatsApp()">📤 WhatsApp Share</button>
+
+<button class="messengerBtn" onclick="shareMessenger()">💬 Messenger Share</button>
+
+`;
+
+}
+
+function copyLink(){
+
+navigator.clipboard.writeText(generatedLink);
+
+alert("Link Copied ✅");
+
+}
+
+function shareWhatsApp(){
+
+let url="https://wa.me/?text="+encodeURIComponent(generatedLink);
+
+window.open(url);
+
+}
+
+function shareMessenger(){
+
+let url="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(generatedLink);
+
+window.open(url);
+
+}
+
+function loadData(){
+
+const params=new URLSearchParams(location.search);
+
+const data=params.get("data");
+
+if(data){
+
+let d=atob(data).split("|");
+
+document.getElementById("main").innerHTML=
+
+`
+
+<div class="title">🌙 Eid Mubarak</div>
+
+<h2>${d[0]}</h2>
+
+<p>${d[3]}</p>
+
+<div class="numberCard">
+
+💸 Salami পাঠান (${d[1]})
+
+<br><br>
+
+${d[2]}
+
+</div>
+
+<button onclick="location.href=location.pathname">
+
+আপনিও নিজের Salami Link তৈরি করুন
+
+</button>
+
+`;
+
+}
+
+}
+
+loadData();
+
+</script>
+
+</body>
+</html>
