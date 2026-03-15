@@ -2,135 +2,112 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Eid Salami Viral Link</title>
+<title>Eid Salami Link</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Hind Siliguri',sans-serif;
-}
-
 body{
-background:linear-gradient(135deg,#020024,#090979,#00d4ff);
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:15px;
+margin:0;
+font-family:'Hind Siliguri',sans-serif;
+background:#021b2b;
 color:white;
+text-align:center;
 overflow-x:hidden;
 }
 
 .container{
-width:100%;
 max-width:420px;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(20px);
-border-radius:20px;
+margin:auto;
 padding:20px;
-text-align:center;
-box-shadow:0 0 25px rgba(0,0,0,0.4);
 }
 
 .title{
-font-size:26px;
+font-size:28px;
 color:#FFD700;
-margin-bottom:10px;
 }
 
 input,select,textarea{
 width:100%;
-padding:12px;
-margin:8px 0;
+padding:10px;
+margin:6px 0;
+border-radius:8px;
 border:none;
-border-radius:10px;
-font-size:15px;
-}
-
-textarea{
-min-height:70px;
 }
 
 button{
 width:100%;
-padding:14px;
+padding:12px;
+margin-top:8px;
 border:none;
-border-radius:12px;
+border-radius:10px;
 background:#FFD700;
-color:black;
-font-weight:700;
-font-size:15px;
+font-weight:bold;
 cursor:pointer;
+}
+
+.share{
+background:#25D366;
+color:white;
+}
+
+.copy{
+background:#ff9800;
+color:white;
+}
+
+.photo{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
 margin-top:10px;
 }
 
-.copyBtn{background:#ff9800;color:white;}
-.shareBtn{background:#25D366;color:white;}
-.messengerBtn{background:#0084FF;color:white;}
-
 .numberCard{
-margin:20px 0;
-background:rgba(255,255,255,0.12);
-padding:15px;
-border-radius:15px;
-font-size:18px;
-}
-
-.linkbox{
-margin-top:20px;
-background:#00000070;
+background:#ffffff20;
 padding:12px;
 border-radius:10px;
-word-break:break-all;
-font-size:14px;
+margin:10px 0;
 }
-
-.counterBox{
-margin-top:15px;
-font-size:14px;
-opacity:0.9;
-}
-
-.adbox{
-margin-top:20px;
-padding:10px;
-background:#ffffff10;
-border-radius:10px;
-}
-
-/* money animation */
 
 .money{
 position:fixed;
-top:-50px;
-font-size:26px;
-animation:fall linear forwards;
+top:-20px;
+font-size:22px;
+animation:fall 6s linear infinite;
 }
 
 @keyframes fall{
-to{
-transform:translateY(110vh) rotate(360deg);
-}
+0%{transform:translateY(-50px);}
+100%{transform:translateY(110vh);}
 }
 
-.popup{
+.fireworks{
 position:fixed;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
-background:#000;
-padding:15px;
-border-radius:12px;
-display:none;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+background:url('https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif') center/cover;
+opacity:.25;
+}
+
+.banner{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.adbox{
+background:#ffffff10;
+padding:10px;
+margin-top:10px;
+border-radius:10px;
 }
 
 </style>
@@ -138,198 +115,102 @@ display:none;
 
 <body>
 
+<div class="fireworks"></div>
+
 <div class="container" id="main">
 
-<div class="title">🌙 Eid Salami Link</div>
+<img class="banner" src="https://i.imgur.com/4NJlZbY.png">
 
-<p>নিজের Eid Salami Link তৈরি করুন</p>
+<h2 class="title">🌙 Eid Salami Link</h2>
 
 <input id="name" placeholder="আপনার নাম">
 
-<select id="method">
-<option value="bKash Personal">bKash Personal</option>
-<option value="Nagad Personal">Nagad Personal</option>
-</select>
-
 <input id="number" placeholder="bKash / Nagad নাম্বার">
 
-<select id="message">
-
-<option value="ঈদ মোবারক! সালামি পাঠাতে ভুলবেন না 😁">
-ঈদ মোবারক! সালামি পাঠাতে ভুলবেন না 😁
-</option>
-
-<option value="আজ ঈদ! সালামি না দিলে বন্ধুত্ব শেষ 😜">
-আজ ঈদ! সালামি না দিলে বন্ধুত্ব শেষ 😜
-</option>
-
-<option value="ঈদের খুশি দ্বিগুণ হবে যদি সালামি পাঠান 🥳">
-ঈদের খুশি দ্বিগুণ হবে যদি সালামি পাঠান 🥳
-</option>
-
+<select id="method">
+<option>bKash</option>
+<option>Nagad</option>
 </select>
 
-<textarea id="custom" placeholder="নিজের Eid message লিখুন"></textarea>
+<input type="file" id="photo">
 
-<button onclick="generate()">🎉 লিংক তৈরি করুন</button>
+<textarea id="msg" placeholder="Eid message"></textarea>
+
+<button onclick="generate()">🎉 Link Generate</button>
 
 <div id="result"></div>
 
-<div class="counterBox">
-👀 Visitors: <span id="visitors">0</span> |
-💸 Salami Sent: <span id="salami">0</span>
-</div>
-
 <div class="adbox">
-
-<!-- High CPC Ads here -->
-
-<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
-
+AdSense / High CPC Ads
 </div>
 
-</div>
-
-<div class="popup" id="sharePopup">
-বন্ধুদের সাথে শেয়ার করুন 😎
-<button onclick="shareWhatsApp()">WhatsApp</button>
 </div>
 
 <script>
 
 let generatedLink="";
 
-/* visitor counter demo */
-
-let v=localStorage.getItem("visitors");
-if(!v){v=1}else{v++}
-localStorage.setItem("visitors",v);
-document.getElementById("visitors").innerText=v;
-
-/* salami counter demo */
-
-let s=localStorage.getItem("salami");
-if(!s){s=0}
-document.getElementById("salami").innerText=s;
-
-/* money animation */
-
-function moneyRain(){
-
-for(let i=0;i<20;i++){
-
-let m=document.createElement("div");
-
-m.className="money";
-m.innerHTML="💸";
-
-m.style.left=Math.random()*100+"%";
-m.style.animationDuration=(3+Math.random()*3)+"s";
-
-document.body.appendChild(m);
-
-setTimeout(()=>{m.remove()},6000);
-
-}
-
-}
-
-/* generate link */
-
 function generate(){
 
-let name=document.getElementById("name").value.trim();
+let name=document.getElementById("name").value;
+let number=document.getElementById("number").value;
 let method=document.getElementById("method").value;
-let number=document.getElementById("number").value.trim();
-let msg=document.getElementById("custom").value.trim();
+let msg=document.getElementById("msg").value;
 
-if(name=="" || number==""){
-alert("নাম এবং নাম্বার লিখুন");
-return;
-}
+let photo=document.getElementById("photo").files[0];
 
-if(msg==""){
-msg=document.getElementById("message").value;
-}
+let reader=new FileReader();
 
-let data=btoa(name+"|"+method+"|"+number+"|"+msg);
+reader.onload=function(){
+
+let data=btoa(name+"|"+method+"|"+number+"|"+msg+"|"+reader.result);
 
 generatedLink=location.origin+location.pathname+"?data="+data;
 
-document.getElementById("result").innerHTML=
+document.getElementById("result").innerHTML=`
 
-`
-
-<div class="linkbox">
-আপনার Eid Salami Link<br><br>${generatedLink}
+<div style="background:#00000070;padding:10px;border-radius:8px">
+${generatedLink}
 </div>
 
-<button class="copyBtn" onclick="copyLink()">📋 Copy Link</button>
-<button class="shareBtn" onclick="shareWhatsApp()">📤 WhatsApp Share</button>
-<button class="messengerBtn" onclick="shareMessenger()">💬 Messenger Share</button>
+<button class="copy" onclick="copyLink()">Copy Link</button>
+<button class="share" onclick="share()">WhatsApp Share</button>
 
 `;
 
 }
 
-/* copy */
+if(photo){reader.readAsDataURL(photo)}
+
+}
 
 function copyLink(){
-
 navigator.clipboard.writeText(generatedLink);
-alert("Link Copied ✅");
-
+alert("Copied");
 }
 
-/* whatsapp */
-
-function shareWhatsApp(){
+function share(){
 
 let text="🌙 Eid Mubarak!\n\n"+
-"আজ ঈদের দিন 😍\n"+
-"ভালবাসা ও সালাম নিন ❤️\n\n"+
-"আর হ্যাঁ… সালামি না দিলে কিন্তু মন খারাপ করে ফেলবো 😜\n\n"+
+"সালাম নিন ❤️\n"+
+"সালামি দিতে ভুলবেন না 😜\n\n"+
 generatedLink;
 
-let url="https://wa.me/?text="+encodeURIComponent(text);
-
-window.open(url,"_blank");
+window.open("https://wa.me/?text="+encodeURIComponent(text));
 
 }
-
-/* messenger */
-
-function shareMessenger(){
-
-let url="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(generatedLink);
-
-window.open(url,"_blank");
-
-}
-
-/* load data */
 
 function loadData(){
 
-const params=new URLSearchParams(location.search);
+let p=new URLSearchParams(location.search).get("data");
 
-const data=params.get("data");
+if(!p)return;
 
-if(data){
+let d=atob(p).split("|");
 
-let d=atob(data).split("|");
+document.getElementById("main").innerHTML=`
 
-moneyRain();
-
-let s=localStorage.getItem("salami");
-s++;
-localStorage.setItem("salami",s);
-
-document.getElementById("main").innerHTML=
-
-`
-
-<div class="title">🌙 Eid Mubarak</div>
+<img src="${d[4]}" class="photo">
 
 <h2>${d[0]}</h2>
 
@@ -337,25 +218,53 @@ document.getElementById("main").innerHTML=
 
 <div class="numberCard">
 
-💸 Salami পাঠান (${d[1]})<br><br>${d[2]}
+💸 Salami পাঠান (${d[1]})
+
+<br><br>
+
+${d[2]}
 
 </div>
 
 <button onclick="location.href=location.pathname">
-আপনিও নিজের Salami Link তৈরি করুন
+
+নিজের Link বানান
+
 </button>
 
 `;
 
-setTimeout(()=>{
-document.getElementById("sharePopup").style.display="block";
-},3000);
-
-}
-
 }
 
 loadData();
+
+function money(){
+
+let m=document.createElement("div");
+
+m.className="money";
+
+m.style.left=Math.random()*100+"%";
+
+m.innerHTML="💸";
+
+document.body.appendChild(m);
+
+setTimeout(()=>{m.remove()},6000)
+
+}
+
+setInterval(money,800);
+
+let v=localStorage.getItem("visit")||0;
+v++;
+localStorage.setItem("visit",v);
+
+console.log("Visitor:",v);
+
+setTimeout(()=>{
+alert("বন্ধুদের সাথে share করে Eid Salami সংগ্রহ করুন 😄");
+},4000)
 
 </script>
 
