@@ -1,274 +1,367 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Salami - Digital Card</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-gold: #FFD700;
+            --deep-royal: #0f0c29;
+            --gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            --glass: rgba(255, 255, 255, 0.1);
+        }
 
-<title>Eid Salami Link Generator</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+        body {
+            background: var(--gradient);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+            overflow-x: hidden;
+        }
 
-<style>
+        /* Animated Background Stars */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Hind Siliguri',sans-serif;
-}
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            animation: fadeIn 1s ease-out;
+        }
 
-body{
-background:linear-gradient(135deg,#020024,#090979,#00d4ff);
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:15px;
-color:white;
-}
+        /* Banner Design */
+        .eid-banner {
+            width: 100%;
+            height: 180px;
+            background: url('https://img.freepik.com/free-vector/eid-mubarak-greeting-card-with-mosque-crescent-moon_1017-31302.jpg?w=800') center/cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            border: 2px solid var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-.container{
-width:100%;
-max-width:420px;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(20px);
-border-radius:20px;
-padding:20px;
-text-align:center;
-box-shadow:0 0 25px rgba(0,0,0,0.4);
-}
+        .eid-banner::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+        }
 
-.title{
-font-size:26px;
-color:#FFD700;
-margin-bottom:10px;
-}
+        .eid-text-anim {
+            z-index: 1;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-gold);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            animation: pulse 2s infinite ease-in-out;
+        }
 
-input,select,textarea{
-width:100%;
-padding:12px;
-margin:8px 0;
-border:none;
-border-radius:10px;
-font-size:15px;
-}
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
 
-textarea{
-min-height:70px;
-}
+        .title span {
+            color: var(--primary-gold);
+        }
 
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-background:#FFD700;
-color:black;
-font-weight:700;
-font-size:15px;
-cursor:pointer;
-margin-top:10px;
-}
+        /* Form Styling */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
 
-.copyBtn{
-background:#ff9800;
-color:white;
-}
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--primary-gold);
+            margin-left: 5px;
+        }
 
-.shareBtn{
-background:#25D366;
-color:white;
-}
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            background: rgba(0,0,0,0.2);
+            color: white;
+            font-size: 15px;
+            transition: 0.3s;
+            outline: none;
+        }
 
-.messengerBtn{
-background:#0084FF;
-color:white;
-}
+        input:focus {
+            border-color: var(--primary-gold);
+            background: rgba(0,0,0,0.4);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
 
-.numberCard{
-margin:20px 0;
-background:rgba(255,255,255,0.12);
-padding:15px;
-border-radius:15px;
-font-size:18px;
-}
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s transform, 0.3s box-shadow;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-.linkbox{
-margin-top:20px;
-background:#00000070;
-padding:12px;
-border-radius:10px;
-word-break:break-all;
-font-size:14px;
-}
+        .btn:active { transform: scale(0.98); }
 
-</style>
+        .btn-generate {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+        }
+
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn-copy { background: #6c5ce7; color: white; }
+
+        /* Result Card */
+        .salami-card {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px dashed var(--primary-gold);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .number-display {
+            font-size: 24px;
+            color: var(--primary-gold);
+            font-weight: bold;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .link-box {
+            background: #000;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-top: 15px;
+            word-break: break-all;
+            opacity: 0.8;
+        }
+
+    </style>
 </head>
 
 <body>
 
-<div class="container" id="main">
+    <div class="stars-container" id="stars"></div>
 
-<div class="title">🌙 Eid Salami Link</div>
+    <div class="container" id="mainContainer">
+        <!-- Professional Banner -->
+        <div class="eid-banner">
+            <div class="eid-text-anim">Eid Mubarak</div>
+        </div>
 
-<p>নিজের Eid Salami Link তৈরি করুন</p>
+        <div id="contentArea">
+            <div class="title">🌙 ইদ সালামি <span>লিঙ্ক জেনারেটর</span></div>
+            
+            <div class="input-group">
+                <label>আপনার নাম</label>
+                <input id="name" type="text" placeholder="যেমন: আরিয়ান আহমেদ">
+            </div>
 
-<input id="name" placeholder="আপনার নাম">
+            <div class="input-group">
+                <label>পেমেন্ট মেথড</label>
+                <select id="method">
+                    <option value="bKash Personal">bKash (Personal)</option>
+                    <option value="Nagad Personal">Nagad (Personal)</option>
+                    <option value="Rocket">Rocket</option>
+                </select>
+            </div>
 
-<select id="method">
-<option value="bKash Personal">bKash Personal</option>
-<option value="Nagad Personal">Nagad Personal</option>
-</select>
+            <div class="input-group">
+                <label>নাম্বার</label>
+                <input id="number" type="number" placeholder="017xxxxxxxx">
+            </div>
 
-<input id="number" placeholder="bKash / Nagad নাম্বার">
+            <div class="input-group">
+                <label>সালামি মেসেজ</label>
+                <textarea id="customMsg" placeholder="সালামি না দিলে কিন্তু দাওয়াত নাই! 😜"></textarea>
+            </div>
 
-<select id="message">
+            <button class="btn btn-generate" onclick="generateLink()">
+                ✨ ম্যাজিক লিঙ্ক তৈরি করুন
+            </button>
+        </div>
 
-<option value="ঈদ মোবারক! সালামি পাঠাতে ভুলবেন না 😁">
-ঈদ মোবারক! সালামি পাঠাতে ভুলবেন না 😁
-</option>
-
-<option value="আজ ঈদ! সালামি না দিলে বন্ধুত্ব শেষ 😜">
-আজ ঈদ! সালামি না দিলে বন্ধুত্ব শেষ 😜
-</option>
-
-<option value="ঈদের খুশি দ্বিগুণ হবে যদি সালামি পাঠান 🥳">
-ঈদের খুশি দ্বিগুণ হবে যদি সালামি পাঠান 🥳
-</option>
-
-</select>
-
-<textarea id="custom" placeholder="নিজের Eid message লিখুন"></textarea>
-
-<button onclick="generate()">🎉 লিংক তৈরি করুন</button>
-
-<div id="result"></div>
-
-</div>
+        <div id="resultArea" style="display: none;">
+            <!-- Result will be injected here -->
+        </div>
+    </div>
 
 <script>
+    // Create subtle animated stars
+    function createStars() {
+        const container = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.style.position = 'absolute';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = '2px';
+            star.style.height = '2px';
+            star.style.background = 'white';
+            star.style.borderRadius = '50%';
+            star.style.opacity = Math.random();
+            star.style.animation = `pulse ${Math.random() * 3 + 2}s infinite`;
+            container.appendChild(star);
+        }
+    }
+    createStars();
 
-let generatedLink="";
+    let generatedUrl = "";
 
-function generate(){
+    function generateLink() {
+        const name = document.getElementById("name").value.trim();
+        const method = document.getElementById("method").value;
+        const number = document.getElementById("number").value.trim();
+        const msg = document.getElementById("customMsg").value.trim() || "ঈদ মোবারক! সালামি পাঠাতে ভুলবেন না কিন্তু।";
 
-let name=document.getElementById("name").value.trim();
-let method=document.getElementById("method").value;
-let number=document.getElementById("number").value.trim();
-let msg=document.getElementById("custom").value.trim();
+        if (!name || !number) {
+            alert("দয়া করে নাম এবং নাম্বার সঠিক ভাবে দিন!");
+            return;
+        }
 
-if(name=="" || number==""){
-alert("নাম এবং নাম্বার লিখুন");
-return;
-}
+        const data = btoa(unescape(encodeURIComponent(`${name}|${method}|${number}|${msg}`)));
+        generatedUrl = window.location.origin + window.location.pathname + "?salami=" + data;
 
-if(msg==""){
-msg=document.getElementById("message").value;
-}
+        document.getElementById("contentArea").style.display = "none";
+        const resultArea = document.getElementById("resultArea");
+        resultArea.style.display = "block";
+        
+        resultArea.innerHTML = `
+            <div class="salami-card">
+                <p>অভিনন্দন! আপনার লিঙ্ক তৈরি হয়েছে।</p>
+                <div class="link-box">${generatedUrl}</div>
+            </div>
+            
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 লিঙ্ক কপি করুন</button>
+            <button class="btn btn-whatsapp" onclick="shareWA()">🟢 হোয়াটসঅ্যাপে পাঠান</button>
+            <button class="btn btn-generate" style="background:#555; color:white;" onclick="location.reload()">🔄 নতুন করে তৈরি করুন</button>
+        `;
 
-let data=btoa(name+"|"+method+"|"+number+"|"+msg);
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#FFD700', '#ffffff', '#FFA500']
+        });
+    }
 
-generatedLink=location.origin+location.pathname+"?data="+data;
+    function copyToClipboard() {
+        navigator.clipboard.writeText(generatedUrl);
+        alert("লিঙ্কটি কপি করা হয়েছে! এখন বন্ধুকে পাঠান। ✅");
+    }
 
-document.getElementById("result").innerHTML=`
+    function shareWA() {
+        const text = `🌙 ঈদ মোবারক!\n\nসালামি না দিলে কিন্তু বন্ধুত্ব শেষ! 😜\nসালামি পাঠানোর লিঙ্ক: ${generatedUrl}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
 
-<div class="linkbox">
-আপনার Eid Salami Link
-<br><br>
-${generatedLink}
-</div>
+    // Load Reciever View
+    window.onload = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const salamiData = urlParams.get('salami');
 
-<button class="copyBtn" onclick="copyLink()">📋 Copy Link</button>
+        if (salamiData) {
+            try {
+                const decodedData = decodeURIComponent(escape(atob(salamiData)));
+                const [name, method, number, msg] = decodedData.split('|');
 
-<button class="shareBtn" onclick="shareWhatsApp()">📤 WhatsApp Share</button>
+                document.getElementById("contentArea").style.display = "none";
+                const resultArea = document.getElementById("resultArea");
+                resultArea.style.display = "block";
 
-<button class="messengerBtn" onclick="shareMessenger()">💬 Messenger Share</button>
+                resultArea.innerHTML = `
+                    <h2 style="color:var(--primary-gold); margin-bottom:10px;">${name} এর পক্ষ থেকে</h2>
+                    <p style="font-style: italic; margin-bottom:20px;">"${msg}"</p>
+                    
+                    <div class="salami-card">
+                        <p style="font-size:14px">সালামি পাঠানোর মাধ্যম</p>
+                        <h3 style="margin:5px 0;">${method}</h3>
+                        <div class="number-display">${number}</div>
+                    </div>
 
-`;
+                    <button class="btn btn-generate" onclick="window.location.href=window.location.pathname">
+                        🎁 আপনিও সালামি লিঙ্ক বানান
+                    </button>
+                `;
+                
+                // Celebration for the receiver
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                }, 500);
 
-}
-
-function copyLink(){
-
-navigator.clipboard.writeText(generatedLink);
-alert("Link Copied ✅");
-
-}
-
-function shareWhatsApp(){
-
-let text=
-"🌙 Eid Mubarak!\n\n"+
-"আজ ঈদের দিন 😍\n"+
-"ভালবাসা ও সালাম নিন ❤️\n\n"+
-"আর হ্যাঁ… সালামি না দিলে কিন্তু মন খারাপ করে ফেলবো 😜\n\n"+
-"এইখানে পাঠাতে পারেন 👇\n\n"+
-generatedLink;
-
-let url="https://wa.me/?text="+encodeURIComponent(text);
-
-window.open(url,"_blank");
-
-}
-
-function shareMessenger(){
-
-let text=
-"🌙 Eid Mubarak!\n\n"+
-"সালাম নিন ❤️\n"+
-"আর সালামি না দিলে কিন্তু বন্ধুত্ব শেষ 😜\n\n"+
-generatedLink;
-
-let url="https://www.facebook.com/sharer/sharer.php?quote="+encodeURIComponent(text)+"&u="+encodeURIComponent(generatedLink);
-
-window.open(url,"_blank");
-
-}
-
-function loadData(){
-
-const params=new URLSearchParams(location.search);
-
-const data=params.get("data");
-
-if(data){
-
-let d=atob(data).split("|");
-
-document.getElementById("main").innerHTML=`
-
-<div class="title">🌙 Eid Mubarak</div>
-
-<h2>${d[0]}</h2>
-
-<p>${d[3]}</p>
-
-<div class="numberCard">
-
-💸 Salami পাঠান (${d[1]})
-
-<br><br>
-
-${d[2]}
-
-</div>
-
-<button onclick="location.href=location.pathname">
-আপনিও নিজের Salami Link তৈরি করুন
-</button>
-
-`;
-
-}
-
-}
-
-loadData();
-
+            } catch (e) {
+                console.error("Data error");
+            }
+        }
+    };
 </script>
 
 </body>
 </html>
-```
