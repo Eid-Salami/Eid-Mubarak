@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -19,157 +20,88 @@ font-family:'Hind Siliguri',sans-serif;
 }
 
 body{
-
 background:linear-gradient(135deg,#020024,#090979,#00d4ff);
-
 min-height:100vh;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 padding:15px;
-
 color:white;
-
 }
 
 .container{
-
 width:100%;
 max-width:420px;
-
 background:rgba(255,255,255,0.08);
 backdrop-filter:blur(20px);
-
 border-radius:20px;
-
 padding:20px;
-
 text-align:center;
-
 box-shadow:0 0 25px rgba(0,0,0,0.4);
-
 }
 
 .title{
-
 font-size:26px;
 color:#FFD700;
 margin-bottom:10px;
-
 }
 
 input,select,textarea{
-
 width:100%;
-
 padding:12px;
-
 margin:8px 0;
-
 border:none;
-
 border-radius:10px;
-
 font-size:15px;
-
 }
 
 textarea{
-
 min-height:70px;
-
 }
 
 button{
-
 width:100%;
-
 padding:14px;
-
 border:none;
-
 border-radius:12px;
-
 background:#FFD700;
-
 color:black;
-
 font-weight:700;
-
 font-size:15px;
-
 cursor:pointer;
-
 margin-top:10px;
-
-}
-
-.shareBtn{
-
-background:#25D366;
-
-color:white;
-
 }
 
 .copyBtn{
-
 background:#ff9800;
-
 color:white;
+}
 
+.shareBtn{
+background:#25D366;
+color:white;
 }
 
 .messengerBtn{
-
 background:#0084FF;
-
 color:white;
-
 }
 
 .numberCard{
-
 margin:20px 0;
-
 background:rgba(255,255,255,0.12);
-
 padding:15px;
-
 border-radius:15px;
-
 font-size:18px;
-
 }
 
 .linkbox{
-
 margin-top:20px;
-
 background:#00000070;
-
 padding:12px;
-
 border-radius:10px;
-
 word-break:break-all;
-
 font-size:14px;
-
-}
-
-.adbox{
-
-margin-top:20px;
-
-background:#ffffff10;
-
-padding:10px;
-
-border-radius:10px;
-
 }
 
 </style>
@@ -186,10 +118,8 @@ border-radius:10px;
 <input id="name" placeholder="আপনার নাম">
 
 <select id="method">
-
 <option value="bKash Personal">bKash Personal</option>
 <option value="Nagad Personal">Nagad Personal</option>
-
 </select>
 
 <input id="number" placeholder="bKash / Nagad নাম্বার">
@@ -216,14 +146,6 @@ border-radius:10px;
 
 <div id="result"></div>
 
-<div class="adbox">
-
-<!-- Ads Here -->
-
-<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
-
-</div>
-
 </div>
 
 <script>
@@ -232,10 +154,15 @@ let generatedLink="";
 
 function generate(){
 
-let name=document.getElementById("name").value;
+let name=document.getElementById("name").value.trim();
 let method=document.getElementById("method").value;
-let number=document.getElementById("number").value;
-let msg=document.getElementById("custom").value;
+let number=document.getElementById("number").value.trim();
+let msg=document.getElementById("custom").value.trim();
+
+if(name=="" || number==""){
+alert("নাম এবং নাম্বার লিখুন");
+return;
+}
 
 if(msg==""){
 msg=document.getElementById("message").value;
@@ -243,20 +170,14 @@ msg=document.getElementById("message").value;
 
 let data=btoa(name+"|"+method+"|"+number+"|"+msg);
 
-generatedLink=location.href.split("?")[0]+"?data="+data;
+generatedLink=location.origin+location.pathname+"?data="+data;
 
-document.getElementById("result").innerHTML=
-
-`
+document.getElementById("result").innerHTML=`
 
 <div class="linkbox">
-
 আপনার Eid Salami Link
-
 <br><br>
-
 ${generatedLink}
-
 </div>
 
 <button class="copyBtn" onclick="copyLink()">📋 Copy Link</button>
@@ -272,24 +193,37 @@ ${generatedLink}
 function copyLink(){
 
 navigator.clipboard.writeText(generatedLink);
-
 alert("Link Copied ✅");
 
 }
 
 function shareWhatsApp(){
 
-let url="https://wa.me/?text="+encodeURIComponent(generatedLink);
+let text=
+"🌙 Eid Mubarak!\n\n"+
+"আজ ঈদের দিন 😍\n"+
+"ভালবাসা ও সালাম নিন ❤️\n\n"+
+"আর হ্যাঁ… সালামি না দিলে কিন্তু মন খারাপ করে ফেলবো 😜\n\n"+
+"এইখানে পাঠাতে পারেন 👇\n\n"+
+generatedLink;
 
-window.open(url);
+let url="https://wa.me/?text="+encodeURIComponent(text);
+
+window.open(url,"_blank");
 
 }
 
 function shareMessenger(){
 
-let url="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(generatedLink);
+let text=
+"🌙 Eid Mubarak!\n\n"+
+"সালাম নিন ❤️\n"+
+"আর সালামি না দিলে কিন্তু বন্ধুত্ব শেষ 😜\n\n"+
+generatedLink;
 
-window.open(url);
+let url="https://www.facebook.com/sharer/sharer.php?quote="+encodeURIComponent(text)+"&u="+encodeURIComponent(generatedLink);
+
+window.open(url,"_blank");
 
 }
 
@@ -303,9 +237,7 @@ if(data){
 
 let d=atob(data).split("|");
 
-document.getElementById("main").innerHTML=
-
-`
+document.getElementById("main").innerHTML=`
 
 <div class="title">🌙 Eid Mubarak</div>
 
@@ -324,9 +256,7 @@ ${d[2]}
 </div>
 
 <button onclick="location.href=location.pathname">
-
 আপনিও নিজের Salami Link তৈরি করুন
-
 </button>
 
 `;
@@ -341,3 +271,4 @@ loadData();
 
 </body>
 </html>
+```
