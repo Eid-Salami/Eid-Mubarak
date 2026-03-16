@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -145,6 +146,12 @@ let method=document.getElementById("method").value
 let msg=document.getElementById("custom").value || document.getElementById("msg").value
 
 let selfieInput=document.getElementById("selfie")
+
+if(!selfieInput.files[0]){
+alert("Selfie add করুন")
+return
+}
+
 let reader=new FileReader()
 
 reader.onload=function(){
@@ -153,7 +160,13 @@ let selfie=reader.result
 
 let data=btoa(JSON.stringify({name,number,method,msg,selfie}))
 
-let link=location.href.split("?")[0]+"?data="+data
+let longLink=location.href.split("?")[0]+"?data="+data
+
+fetch("https://tinyurl.com/api-create.php?url="+encodeURIComponent(longLink))
+
+.then(res=>res.text())
+
+.then(shortLink=>{
 
 let shareText=`🌙 ঈদ মোবারক!
 
@@ -163,7 +176,7 @@ let shareText=`🌙 ঈদ মোবারক!
 
 ধন্যবাদ ও শুভেচ্ছা রইলো।
 
-${link}`
+${shortLink}`
 
 document.getElementById("result").innerHTML=`
 
@@ -171,7 +184,7 @@ document.getElementById("result").innerHTML=`
 
 <b>আপনার Eid Salami Link</b><br><br>
 
-<input value="${link}" id="linkInput">
+<input value="${shortLink}" id="linkInput">
 
 <br><br>
 
@@ -183,7 +196,7 @@ document.getElementById("result").innerHTML=`
 WhatsApp
 </a>
 
-<a href="https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(shareText)}&u=${link}" target="_blank">
+<a href="https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(shareText)}&u=${shortLink}" target="_blank">
 Facebook
 </a>
 
@@ -192,6 +205,8 @@ Facebook
 </div>
 
 `
+
+})
 
 }
 
