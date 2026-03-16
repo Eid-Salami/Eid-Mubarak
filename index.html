@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eid Salami Request - ঈদ মোবারক!</title>
+    <title>Eid Salami - ঈদ মোবারক!</title>
     
     <meta property="og:title" content="আমার ঈদের সালামি কই? 😍">
     <meta property="og:description" content="ঈদের আনন্দ ভাগাভাগি করি, সালামি দিন এখনই!">
-    <meta property="og:image" content="https://imgur.com/dW01cIv">
+    <meta property="og:image" content="https://i.imgur.com/dW01cIv.jpg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
@@ -16,47 +16,46 @@
     <style>
         body {
             font-family: 'Hind Siliguri', sans-serif;
-            background: url('https://imgur.com/dW01cIv') no-repeat center center fixed;
+            /* Fixed Background Image Link */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.imgur.com/dW01cIv.jpg') no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        /* Floating Lantern Animation */
         .lantern {
             position: absolute;
-            width: 40px;
-            animation: float 6s ease-in-out infinite;
-            z-index: 1;
+            width: 45px;
+            animation: float 5s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px gold);
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-25px) rotate(5deg); }
         }
 
-        /* Crescent Moon Glow */
         .moon-glow {
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-            animation: pulse 3s infinite alternate;
+            filter: drop-shadow(0 0 20px #fff);
+            animation: moonPulse 4s infinite alternate;
         }
-        @keyframes pulse {
-            from { opacity: 0.8; }
-            to { opacity: 1; transform: scale(1.05); }
+        @keyframes moonPulse {
+            from { opacity: 0.7; transform: scale(1); }
+            to { opacity: 1; transform: scale(1.1); }
         }
 
         .btn-gradient {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #FFD700, #FF8C00);
+            transition: 0.4s;
         }
         .btn-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: scale(1.03);
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.4);
         }
 
         .hidden-section { display: none; }
@@ -64,198 +63,167 @@
 </head>
 <body class="min-h-screen text-gray-800">
 
-    <div class="fixed inset-0 pointer-events-none overflow-hidden">
-        <img src="https://www.svgrepo.com/show/295557/crescent-moon.svg" class="absolute top-10 right-10 w-16 moon-glow" alt="Moon">
-        <img src="https://www.svgrepo.com/show/164947/lantern.svg" class="lantern top-20 left-10 opacity-50">
-        <img src="https://www.svgrepo.com/show/164947/lantern.svg" class="lantern top-60 right-20 opacity-40" style="animation-delay: 2s;">
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <img src="https://www.svgrepo.com/show/295557/crescent-moon.svg" class="absolute top-8 right-8 w-20 moon-glow">
+        <img src="https://www.svgrepo.com/show/164947/lantern.svg" class="lantern top-24 left-6">
+        <img src="https://www.svgrepo.com/show/164947/lantern.svg" class="lantern bottom-24 right-6" style="animation-delay: 2s;">
     </div>
 
-    <div class="flex justify-center my-4">
+    <div class="flex justify-center py-4 relative z-10">
         <script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
     </div>
 
     <div class="max-w-md mx-auto p-4 relative z-10">
         
         <div class="text-center mb-6">
-            <h1 class="text-4xl font-bold text-yellow-500 drop-shadow-md mb-2">🌙 Eid Mubarak!</h1>
-            <p class="text-lg font-semibold bg-white/80 rounded-full py-1 px-4 inline-block">Send Me Some Salami 😄</p>
+            <div class="inline-block bg-yellow-400 text-black px-6 py-2 rounded-full font-bold shadow-lg mb-2">
+                🌙 ঈদ মোবারক!
+            </div>
+            <h1 class="text-3xl font-extrabold text-white drop-shadow-lg">আমার সালামি কই? 🎁</h1>
         </div>
 
-        <div id="generatorSection" class="glass-card p-6 shadow-2xl">
-            <div class="text-center mb-6">
-                <p class="text-gray-700 leading-relaxed">
-                    আজ ঈদের দিন 😍 ভালবাসা ও সালাম নিন ❤️<br>
-                    আর হ্যাঁ… সালামি না দিলে কিন্তু মন খারাপ করে ফেলবো 😜
+        <div id="generatorSection" class="glass-card p-6">
+            <div class="text-center mb-5 border-b pb-4">
+                <p class="text-lg font-medium text-pink-600">
+                    আজ ঈদের দিন 😍 সালামি নিন ❤️<br>
+                    <span class="text-sm text-gray-500 italic">সালামি না দিলে কিন্তু কফি খাওয়াবো না 😜</span>
                 </p>
             </div>
 
             <form id="salamiForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-bold mb-1">আপনার নাম</label>
-                    <input type="text" id="userName" required class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-yellow-400 outline-none" placeholder="উদাঃ রাহুল">
+                <input type="text" id="userName" required class="w-full p-3 rounded-xl border-2 border-yellow-200 outline-none focus:border-yellow-500" placeholder="আপনার নাম লিখুন">
+                
+                <input type="url" id="userPhoto" class="w-full p-3 rounded-xl border-2 border-yellow-200 outline-none focus:border-yellow-500" placeholder="ফটো লিংক (ঐচ্ছিক)">
+
+                <div class="flex gap-2">
+                    <select id="paymentType" class="w-1/3 p-3 rounded-xl border-2 border-yellow-200 outline-none">
+                        <option value="bKash">bKash</option>
+                        <option value="Nagad">Nagad</option>
+                    </select>
+                    <input type="number" id="payNumber" required class="w-2/3 p-3 rounded-xl border-2 border-yellow-200 outline-none" placeholder="পেমেন্ট নম্বর">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-bold mb-1">আপনার একটি সেলফি (URL)</label>
-                    <input type="url" id="userPhoto" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-yellow-400 outline-none" placeholder="https://image-link.com/photo.jpg">
-                </div>
+                <select id="messageList" class="w-full p-3 rounded-xl border-2 border-yellow-200 outline-none text-sm">
+                    <option value="সালামি না দিলে কিন্তু বন্ধুত্ব শেষ 😜">সালামি না দিলে কিন্তু বন্ধুত্ব শেষ 😜</option>
+                    <option value="আপনার সালামির অপেক্ষায় বসে আছি 😆">আপনার সালামির অপেক্ষায় বসে আছি 😆</option>
+                    <option value="একটা ছোট্ট সালামি দিলে ঈদটা জমে যাবে 😍">একটা ছোট্ট সালামি দিলে ঈদটা জমে যাবে 😍</option>
+                </select>
 
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block text-sm font-bold mb-1">পেমেন্ট মাধ্যম</label>
-                        <select id="paymentType" class="w-full p-3 rounded-lg border outline-none">
-                            <option value="bKash Personal">bKash Personal</option>
-                            <option value="Nagad Personal">Nagad Personal</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold mb-1">পার্সোনাল নম্বর</label>
-                        <input type="number" id="payNumber" required class="w-full p-3 rounded-lg border outline-none" placeholder="017xxxxxxxx">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-bold mb-1">সালামি মেসেজ সিলেক্ট করুন</label>
-                    <select id="messageList" class="w-full p-3 rounded-lg border outline-none text-sm">
-                        </select>
-                    <textarea id="customMsg" class="w-full mt-2 p-3 rounded-lg border text-sm outline-none" placeholder="নিজে কিছু লিখতে চাইলে এখানে লিখুন..."></textarea>
-                </div>
-
-                <button type="submit" class="w-full btn-gradient text-white font-bold py-4 rounded-xl text-lg uppercase tracking-wide">সালামি লিংক তৈরি করুন 🚀</button>
+                <button type="submit" class="w-full btn-gradient text-white font-bold py-4 rounded-xl text-lg uppercase shadow-lg">ম্যাজিক লিংক তৈরি করুন ✨</button>
             </form>
         </div>
 
-        <div id="resultSection" class="glass-card p-6 shadow-2xl hidden-section text-center">
+        <div id="resultSection" class="glass-card p-6 hidden-section text-center">
             <div id="visitorDisplay">
-                <div class="relative inline-block mb-4">
-                    <img id="displayImg" src="https://via.placeholder.com/150" class="w-32 h-32 rounded-full border-4 border-yellow-400 object-cover mx-auto shadow-lg">
-                    <div class="absolute -bottom-2 -right-2 bg-yellow-400 p-2 rounded-full">✨</div>
-                </div>
+                <img id="displayImg" src="" class="w-32 h-32 rounded-full border-4 border-yellow-400 object-cover mx-auto shadow-xl mb-4">
                 
-                <h2 class="text-2xl font-bold mb-2 text-indigo-800"><span id="displayName"></span> এর সালামি আবদার!</h2>
-                <div class="bg-yellow-50 p-4 rounded-xl italic mb-6 border-l-4 border-yellow-400">
+                <h2 class="text-2xl font-bold text-indigo-900 mb-2"><span id="displayName"></span> এর সালামি আবদার!</h2>
+                
+                <div class="bg-yellow-100 p-4 rounded-2xl italic mb-6 border-2 border-dashed border-yellow-500">
                     "<span id="displayMsgText"></span>"
                 </div>
 
-                <div class="bg-white p-4 rounded-xl border-2 border-dashed border-pink-400 mb-6">
-                    <p class="text-sm font-bold text-gray-500 uppercase">সালামি পাঠানোর নম্বর (<span id="displayPayType"></span>)</p>
-                    <p class="text-2xl font-bold text-pink-600 tracking-widest mt-1" id="displayPayNum"></p>
+                <div class="bg-gradient-to-r from-pink-50 to-red-50 p-5 rounded-2xl border border-pink-200 mb-6">
+                    <p class="text-xs font-bold text-pink-500 mb-1 uppercase tracking-widest">Send Money To (<span id="displayPayType"></span>)</p>
+                    <p class="text-2xl font-black text-gray-800" id="displayPayNum"></p>
                 </div>
 
                 <div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
             </div>
 
-            <div id="shareArea" class="hidden-section border-t pt-6">
-                <p class="text-green-600 font-bold mb-3">সাফল্যের সাথে লিংক তৈরি হয়েছে! শেয়ার করুন:</p>
-                <input type="text" id="finalLink" readonly class="w-full p-2 bg-gray-100 rounded text-xs mb-4">
+            <div id="shareArea" class="hidden-section border-t mt-6 pt-6">
+                <p class="text-xs font-bold text-gray-400 mb-3 uppercase">নিচের লিংকটি শেয়ার করুন</p>
+                <div class="flex items-center gap-2 mb-4">
+                    <input type="text" id="finalLink" readonly class="flex-1 p-2 bg-gray-100 rounded-lg text-xs outline-none">
+                    <button onclick="copyLink()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm">Copy</button>
+                </div>
                 
-                <div class="grid grid-cols-3 gap-2">
-                    <button onclick="copyLink()" class="bg-blue-500 text-white p-2 rounded text-sm">Copy</button>
-                    <button onclick="shareSocial('messenger')" class="bg-blue-600 text-white p-2 rounded text-sm">Messenger</button>
-                    <button onclick="shareSocial('whatsapp')" class="bg-green-500 text-white p-2 rounded text-sm">WhatsApp</button>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="shareSocial('whatsapp')" class="bg-green-500 text-white p-3 rounded-xl font-bold flex items-center justify-center gap-2">WhatsApp</button>
+                    <button onclick="shareSocial('messenger')" class="bg-blue-600 text-white p-3 rounded-xl font-bold flex items-center justify-center gap-2">Messenger</button>
                 </div>
             </div>
 
-            <button onclick="window.location.href=window.location.pathname" class="mt-8 text-sm text-gray-500 underline">আপনিও এমন লিংক তৈরি করতে চান? ক্লিক করুন</button>
+            <button onclick="location.href=location.pathname" class="mt-8 text-sm text-gray-500 font-bold block w-full text-center hover:text-yellow-600">আপনিও একটি লিংক বানান ➜</button>
         </div>
 
-        <div class="mt-8">
+        <div class="mt-10">
             <script async="async" data-cfasync="false" src="https://sturgeonvelocity.com/b5662ff1d1603e73ba82848872d95bbc/invoke.js"></script>
         </div>
     </div>
 
     <script>
-        const messages = [
-            "ঈদে সালামি না দিলে কিন্তু বন্ধুত্ব শেষ 😜",
-            "আপনার সালামির অপেক্ষায় বসে আছি 😆",
-            "একটা ছোট্ট সালামি দিলে ঈদটা জমে যাবে 😍",
-            "সালামি ছাড়া ঈদ মানেই লবণ ছাড়া তরকারি! 🥘",
-            "সবাই সালামি পায় আমি কেন পাই না? 😭",
-            "কেপটামি বাদ দিয়ে সালামি পাঠান চটজলদি 💸",
-            "বড় হতে চাই না, সারাজীবন সালামি পেতে চাই 👶",
-            "আপনার পকেট খালি করতে আমি আসছি! 🏃‍♂️",
-            "শুভ ঈদ মোবারক! আমাদের ঈদ হোক আনন্দময় ও বরকতময়। ❤️",
-            "আল্লাহ আপনার ও আপনার পরিবারের সকল ইবাদত কবুল করুন। আমীন।"
-        ];
+        // Link Shortening using Base64
+        function encodeData(data) {
+            return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+        }
 
-        // Populate Messages
-        const msgSelect = document.getElementById('messageList');
-        messages.forEach(m => {
-            const opt = document.createElement('option');
-            opt.value = m;
-            opt.textContent = m;
-            msgSelect.appendChild(opt);
-        });
+        function decodeData(str) {
+            try {
+                return JSON.parse(decodeURIComponent(escape(atob(str))));
+            } catch(e) { return null; }
+        }
 
-        // Form Submission
-        document.getElementById('salamiForm').addEventListener('submit', function(e) {
+        const form = document.getElementById('salamiForm');
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const data = {
-                name: document.getElementById('userName').value,
-                photo: document.getElementById('userPhoto').value || 'https://via.placeholder.com/150',
-                payType: document.getElementById('paymentType').value,
-                num: document.getElementById('payNumber').value,
-                msg: document.getElementById('customMsg').value || document.getElementById('messageList').value
+            const userData = {
+                n: document.getElementById('userName').value,
+                p: document.getElementById('userPhoto').value || 'https://i.imgur.com/8K07S6K.png',
+                t: document.getElementById('paymentType').value,
+                m: document.getElementById('payNumber').value,
+                s: document.getElementById('messageList').value
             };
 
-            const params = new URLSearchParams(data);
-            const fullLink = window.location.origin + window.location.pathname + '?' + params.toString();
+            const shortToken = encodeData(userData);
+            const shortUrl = window.location.origin + window.location.pathname + '?id=' + shortToken;
             
-            document.getElementById('finalLink').value = fullLink;
-            document.getElementById('generatorSection').classList.add('hidden-section');
-            document.getElementById('resultSection').classList.remove('hidden-section');
-            document.getElementById('shareArea').classList.remove('hidden-section');
+            document.getElementById('finalLink').value = shortUrl;
+            document.getElementById('generatorSection').style.display = 'none';
+            document.getElementById('resultSection').style.display = 'block';
+            document.getElementById('shareArea').style.display = 'block';
             
-            showVisitorData(data);
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            updateUI(userData);
+            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
         });
 
-        // Check for URL Params (Visitor View)
         window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if(urlParams.has('name')) {
-                document.getElementById('generatorSection').classList.add('hidden-section');
-                document.getElementById('resultSection').classList.remove('hidden-section');
-                
-                showVisitorData({
-                    name: urlParams.get('name'),
-                    photo: urlParams.get('photo'),
-                    payType: urlParams.get('payType'),
-                    num: urlParams.get('num'),
-                    msg: urlParams.get('msg')
-                });
-                
-                // Trigger particles on load for visitor
-                setTimeout(() => {
-                    confetti({ particleCount: 100, spread: 60, colors: ['#FFD700', '#ffffff'] });
-                }, 1000);
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if(id) {
+                const data = decodeData(id);
+                if(data) {
+                    document.getElementById('generatorSection').style.display = 'none';
+                    document.getElementById('resultSection').style.display = 'block';
+                    updateUI(data);
+                    setTimeout(() => {
+                        confetti({ particleCount: 150, spread: 70, colors: ['#FFD700', '#FF0000', '#FFFFFF'] });
+                    }, 500);
+                }
             }
         };
 
-        function showVisitorData(data) {
-            document.getElementById('displayName').innerText = data.name;
-            document.getElementById('displayImg').src = data.photo;
-            document.getElementById('displayPayType').innerText = data.payType;
-            document.getElementById('displayPayNum').innerText = data.num;
-            document.getElementById('displayMsgText').innerText = data.msg;
+        function updateUI(data) {
+            document.getElementById('displayName').innerText = data.n;
+            document.getElementById('displayImg').src = data.p;
+            document.getElementById('displayPayType').innerText = data.t;
+            document.getElementById('displayPayNum').innerText = data.m;
+            document.getElementById('displayMsgText').innerText = data.s;
         }
 
         function copyLink() {
-            const link = document.getElementById('finalLink');
-            link.select();
+            const linkInput = document.getElementById('finalLink');
+            linkInput.select();
             document.execCommand('copy');
-            alert('লিংক কপি হয়েছে!');
+            alert('লিংক কপি হয়েছে! এবার বন্ধুদের পাঠান।');
         }
 
-        function shareSocial(platform) {
-            const link = encodeURIComponent(document.getElementById('finalLink').value);
-            const text = encodeURIComponent("আমার ঈদের সালামি কই? তাড়াতাড়ি পাঠান! 😍");
-            if(platform === 'whatsapp') {
-                window.open(`https://api.whatsapp.com/send?text=${text}%20${link}`);
-            } else {
-                window.open(`fb-messenger://share/?link=${link}`);
-            }
+        function shareSocial(p) {
+            const url = encodeURIComponent(document.getElementById('finalLink').value);
+            const txt = encodeURIComponent("আমার ঈদের সালামি কই? 😍 ");
+            if(p === 'whatsapp') window.open(`https://api.whatsapp.com/send?text=${txt}${url}`);
+            else window.open(`https://www.facebook.com/dialog/send?link=${url}&app_id=291494419107518&redirect_uri=${url}`);
         }
     </script>
 </body>
