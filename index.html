@@ -2,94 +2,81 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Salami Generator</title>
 
-<title>Eid Salami Link Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
 body{
-margin:0;
-font-family:sans-serif;
+font-family:'Hind Siliguri',sans-serif;
 background:url('https://i.imgur.com/dW01cIv.jpg');
 background-size:cover;
-background-position:center;
-color:white;
+background-attachment:fixed;
+margin:0;
 text-align:center;
+color:white;
 }
 
 .overlay{
 background:rgba(0,0,0,0.6);
 min-height:100vh;
-padding:20px;
+padding:30px;
 }
 
 h1{
 font-size:40px;
 color:#FFD700;
-text-shadow:0 0 10px gold;
+animation: glow 2s infinite alternate;
 }
 
-.formbox{
+@keyframes glow{
+from{text-shadow:0 0 10px gold;}
+to{text-shadow:0 0 25px orange;}
+}
+
+.form-box{
 background:rgba(255,255,255,0.1);
-padding:20px;
+padding:25px;
 border-radius:15px;
-max-width:450px;
+max-width:500px;
 margin:auto;
-backdrop-filter:blur(5px);
+backdrop-filter:blur(10px);
 }
 
 input,select,textarea{
-width:100%;
+width:90%;
 padding:10px;
-margin:8px 0;
+margin:10px;
 border:none;
 border-radius:8px;
 }
 
 button{
-background:#00c853;
+background:#FFD700;
+color:black;
+padding:12px 25px;
 border:none;
-padding:12px;
-color:white;
-font-size:16px;
-border-radius:8px;
+border-radius:10px;
+font-weight:bold;
 cursor:pointer;
 }
 
 button:hover{
-background:#00e676;
+background:orange;
 }
 
-.result{
+.link-box{
 margin-top:20px;
-background:#00000080;
-padding:15px;
+background:white;
+color:black;
+padding:10px;
 border-radius:10px;
-}
-
-.copybtn{
-background:#ff9800;
-margin-top:10px;
+word-break:break-all;
 }
 
 .share{
 margin-top:10px;
-}
-
-.banner{
-font-size:22px;
-margin-bottom:10px;
-color:#fff;
-}
-
-.confetti{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
 }
 
 </style>
@@ -99,121 +86,94 @@ pointer-events:none;
 
 <div class="overlay">
 
-<h1>🌙 Eid Mubarak</h1>
+<h1>🌙 Eid Mubarak 🌙</h1>
 
-<div class="banner">
-💚 Eid Salami Link Generate করুন 💚
-</div>
+<div class="form-box">
 
-<div class="formbox">
-
-<input id="name" placeholder="আপনার নাম লিখুন">
+<input id="name" placeholder="আপনার নাম">
 
 <input type="file" id="selfie">
 
 <select id="method">
-<option value="Bkash">Bkash Personal</option>
-<option value="Nagad">Nagad Personal</option>
+<option value="bkash">Bkash Personal</option>
+<option value="nagad">Nagad Personal</option>
 </select>
 
 <input id="number" placeholder="Bkash / Nagad Number">
 
-<select id="messageSelect"></select>
+<select id="msgSelect">
+<option>ঈদের সালামি না দিলে কিন্তু মন খারাপ করবো 😜</option>
+<option>আজ ঈদ! সালামি দিলে দোয়া ফ্রি 🤲</option>
+<option>ঈদের খুশি বাড়াতে ছোট্ট একটা সালামি পাঠাতে পারেন 😉</option>
+<option>সালামি দিলে ঈদের আনন্দ দ্বিগুণ হবে 🎉</option>
+<option>আপনার সালামি আমার ঈদের সুখ 😍</option>
+</select>
 
-<textarea id="customMsg" placeholder="নিজের মেসেজ লিখতে চাইলে এখানে লিখুন"></textarea>
+<textarea id="customMsg" placeholder="নিজের Eid Mubarak Message লিখতে পারেন"></textarea>
 
-<button onclick="generateLink()">🎁 Link Generate</button>
-
-<div class="result" id="result" style="display:none">
-
-<p id="showLink"></p>
-
-<button class="copybtn" onclick="copyLink()">📋 Copy Link</button>
-
-<div class="share">
-<a id="messenger" target="_blank">Messenger</a> |
-<a id="whatsapp" target="_blank">WhatsApp</a>
-</div>
+<button onclick="generate()">Link Generate</button>
 
 </div>
 
-</div>
-
-<br><br>
-
-<!-- ADS -->
-<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
-<script async="async" data-cfasync="false" src="https://sturgeonvelocity.com/b5662ff1d1603e73ba82848872d95bbc/invoke.js"></script>
-<div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
+<div id="result"></div>
 
 </div>
+
 
 <script>
 
-const funnyMessages=[
-"আজ ঈদের দিন 😍 সালামি না দিলে রাগ করবো 😜",
-"ঈদ মোবারক! সালামি পাঠান দ্রুত 💰",
-"ভালবাসা দিবেন পরে, আগে সালামি দিন 😁",
-"ঈদের দিনে টাকা দিলে সওয়াব বেশি 😎",
-"আজকে সালামি দিলে সারা বছর দোয়া পাবেন 🤲",
-"খালি ঈদ মোবারক বললে হবে না 😏",
-"ঈদের মিষ্টি খাবো কিন্তু টাকা আপনার 😁",
-"সালামি পাঠান না হলে মন খারাপ করবো 😜",
-"টাকা কম হলেও সমস্যা নাই 💸",
-"ঈদের খুশি বাড়াতে সালামি দিন 😍",
-"ঈদ মোবারক 💚 সালামি অপেক্ষায় আছি",
-"আজকে না দিলে কবে দিবেন 😜",
-"সালামি পাঠালে আল্লাহ খুশি 😇",
-"মিষ্টির দাম বেশি তাই সালামি চাই 😁",
-"ঈদের দিনে টাকা দিলে দোয়া পাবেন 🤲",
-"একটু সালামি দিন প্লিজ 😎",
-"ঈদের আনন্দ ভাগাভাগি করুন 💚",
-"ঈদের দিনে খালি মেসেজ না টাকা দিন 😁",
-"ভাই সালামি না দিলে চলবে না 😜",
-"ঈদের খুশি বাড়াতে সালামি দিন 💸"
-];
+function generate(){
 
-let select=document.getElementById("messageSelect");
+let name=document.getElementById("name").value
+let number=document.getElementById("number").value
+let method=document.getElementById("method").value
+let msg=document.getElementById("customMsg").value || document.getElementById("msgSelect").value
 
-funnyMessages.forEach(m=>{
-let opt=document.createElement("option");
-opt.text=m;
-select.add(opt);
-});
+let data=btoa(name+"|"+number+"|"+method+"|"+msg)
 
-function generateLink(){
+let link=location.href.split("?")[0]+"?data="+data
 
-let name=document.getElementById("name").value;
-let number=document.getElementById("number").value;
-let method=document.getElementById("method").value;
+document.getElementById("result").innerHTML=`
 
-let msg=document.getElementById("customMsg").value || select.value;
+<div class="link-box">
 
-let data=btoa(name+"|"+number+"|"+method+"|"+msg);
+<b>আপনার Eid Salami Link</b><br><br>
 
-let link=location.href.split("?")[0]+"?data="+data;
+<input value="${link}" id="linkInput" style="width:90%">
 
-document.getElementById("result").style.display="block";
+<br><br>
 
-document.getElementById("showLink").innerText=link;
+<button onclick="copy()">Copy Link</button>
 
-document.getElementById("messenger").href="https://m.me/?link="+link;
+<div class="share">
 
-document.getElementById("whatsapp").href="https://wa.me/?text="+link;
+<a href="https://m.me/?link=${link}" target="_blank">Messenger</a> |
+<a href="https://wa.me/?text=${link}" target="_blank">WhatsApp</a>
+
+</div>
+
+</div>
+
+`
 
 }
 
-function copyLink(){
-
-let text=document.getElementById("showLink").innerText;
-
-navigator.clipboard.writeText(text);
-
-alert("Link Copied");
-
+function copy(){
+let copyText=document.getElementById("linkInput")
+copyText.select()
+document.execCommand("copy")
+alert("Link Copied")
 }
 
 </script>
+
+
+<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
+
+<script async="async" data-cfasync="false" src="https://sturgeonvelocity.com/b5662ff1d1603e73ba82848872d95bbc/invoke.js"></script>
+
+<div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
+
 
 </body>
 </html>
