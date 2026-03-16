@@ -1,44 +1,272 @@
-body {
-  /* ... আগের মতোই ... */
-  color: #000;               /* ডিফল্ট টেক্সট কালো */
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eid Salami Generator</title>
+
+<meta name="description" content="Create your own Eid Salami request link and share with friends.">
+<meta property="og:title" content="Eid Mubarak! Send Me Some Salami 😄">
+<meta property="og:description" content="আজ ঈদের দিন 😍 ভালবাসা ও সালাম নিন ❤️">
+<meta property="og:image" content="https://imgur.com/dW01cIv">
+
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Hind Siliguri',sans-serif;
+margin:0;
+background:url('https://imgur.com/dW01cIv') center/cover fixed;
+color:white;
+text-align:center;
 }
 
-.container {
-  background: rgba(255,255,255,0.75);   /* আরেকটু হালকা সাদা করে দিলাম যাতে কালো টেক্সট ক্লিয়ার দেখায় */
-  backdrop-filter: blur(12px);
+.overlay{
+background:rgba(0,0,0,0.6);
+min-height:100vh;
+padding:20px;
 }
 
-form label {
-  color: #000;               /* লেবেল কালো */
-  font-weight: 700;
+.banner{
+font-size:28px;
+font-weight:bold;
+margin-top:10px;
+color:#ffd700;
+text-shadow:0 0 10px #000;
 }
 
-input, textarea, select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #333;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.9);    /* সাদা ব্যাকগ্রাউন্ড */
-  color: #000;               /* ইনপুট টেক্সট কালো */
-  font-size: 1rem;
+.intro{
+margin:15px 0;
+font-size:18px;
 }
 
-input::placeholder, textarea::placeholder {
-  color: #555;               /* প্লেসহোল্ডার গাঢ় ধূসর */
+.container{
+max-width:450px;
+margin:auto;
+background:rgba(255,255,255,0.1);
+padding:20px;
+border-radius:15px;
+backdrop-filter:blur(5px);
 }
 
-.messages {
-  background: rgba(255,255,255,0.85);
-  color: #000;
+input,select,textarea{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:8px;
+border:none;
 }
 
-#result {
-  background: rgba(255,255,255,0.9);
-  color: #000;
+button{
+background:#ffd700;
+border:none;
+padding:12px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+width:100%;
+margin-top:10px;
 }
 
-#shareLink {
-  background: #f0f0f0;
-  color: #000;
-  border: 1px solid #ccc;
+button:hover{
+background:#ffc107;
 }
+
+.selfie{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid white;
+}
+
+.share{
+margin-top:20px;
+}
+
+.copy{
+background:#00c853;
+color:white;
+}
+
+.whatsapp{
+background:#25D366;
+color:white;
+}
+
+.messenger{
+background:#0084FF;
+color:white;
+}
+
+.eid-decoration{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+pointer-events:none;
+}
+
+.moon{
+position:absolute;
+top:30px;
+right:30px;
+width:80px;
+height:80px;
+background:radial-gradient(circle,#fff,#ccc);
+border-radius:50%;
+box-shadow:0 0 20px white;
+}
+
+.lantern{
+position:absolute;
+width:40px;
+animation:float 6s infinite ease-in-out;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(20px)}
+100%{transform:translateY(0)}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="eid-decoration">
+<div class="moon"></div>
+<img class="lantern" style="left:20%" src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
+<img class="lantern" style="left:70%" src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
+</div>
+
+<div class="overlay">
+
+<div class="banner">🌙 Eid Mubarak 🌙</div>
+
+<div class="intro">
+Eid Mubarak! Send Me Some Salami 😄 <br><br>
+আজ ঈদের দিন 😍 ভালবাসা ও সালাম নিন ❤️ <br>
+আর হ্যাঁ… সালামি না দিলে কিন্তু মন খারাপ করে ফেলবো 😜
+</div>
+
+<div id="generator" class="container">
+
+<h3>আপনার সালামি লিংক তৈরি করুন</h3>
+
+<input id="name" placeholder="আপনার নাম">
+
+<input type="file" id="selfie">
+
+<select id="payment">
+<option>bKash Personal</option>
+<option>Nagad Personal</option>
+</select>
+
+<input id="number" placeholder="Payment Number">
+
+<select id="message">
+<option>ঈদে সালামি না দিলে কিন্তু বন্ধুত্ব শেষ 😜</option>
+<option>আপনার সালামির অপেক্ষায় বসে আছি 😆</option>
+<option>একটা ছোট্ট সালামি দিলে ঈদটা জমে যাবে 😍</option>
+<option>ঈদে সালামি না দিলে কিন্তু কষ্ট পাবো 😢</option>
+<option>ঈদের খুশি বাড়াতে একটা সালামি পাঠান 😁</option>
+<option>বন্ধু একটা সালামি না দিলে চলবে? 😜</option>
+<option>আজ ঈদ, সালামি না দিলে কি চলে? 😆</option>
+</select>
+
+<textarea id="custom" placeholder="নিজের মেসেজ লিখতে পারেন"></textarea>
+
+<button onclick="generate()">Generate Salami Link</button>
+
+</div>
+
+<div id="result" class="container" style="display:none">
+
+<img id="photo" class="selfie">
+
+<h2 id="username"></h2>
+
+<p id="usermsg"></p>
+
+<p id="pay"></p>
+
+<div class="share">
+
+<input id="link" readonly>
+
+<button class="copy" onclick="copyLink()">Copy Link</button>
+
+<button class="whatsapp" onclick="shareWhats()">WhatsApp</button>
+
+<button class="messenger" onclick="shareMsg()">Messenger</button>
+
+</div>
+
+<br>
+
+<button onclick="location.href=location.pathname">
+আপনিও একটি সালামি লিংক তৈরি করুন
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function generate(){
+
+let name=document.getElementById("name").value
+let payment=document.getElementById("payment").value
+let number=document.getElementById("number").value
+let msg=document.getElementById("custom").value || document.getElementById("message").value
+
+let url=location.origin+location.pathname+
+"?user="+encodeURIComponent(name)+
+"&pay="+encodeURIComponent(payment)+
+"&num="+encodeURIComponent(number)+
+"&msg="+encodeURIComponent(msg)
+
+document.getElementById("generator").style.display="none"
+document.getElementById("result").style.display="block"
+
+document.getElementById("username").innerText=name+" এর জন্য সালামি পাঠান ❤️"
+document.getElementById("usermsg").innerText=msg
+document.getElementById("pay").innerText=payment+" : "+number
+document.getElementById("link").value=url
+
+}
+
+function copyLink(){
+let copy=document.getElementById("link")
+copy.select()
+document.execCommand("copy")
+alert("Link Copied")
+}
+
+function shareWhats(){
+let url=document.getElementById("link").value
+window.open("https://wa.me/?text="+encodeURIComponent(url))
+}
+
+function shareMsg(){
+let url=document.getElementById("link").value
+window.open("https://www.facebook.com/sharer/sharer.php?u="+url)
+}
+
+</script>
+
+<!-- Ads Script -->
+
+<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
+
+<script async="async" data-cfasync="false" src="https://sturgeonvelocity.com/b5662ff1d1603e73ba82848872d95bbc/invoke.js"></script>
+
+<div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
+
+</body>
+</html>
