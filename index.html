@@ -83,14 +83,6 @@ border-radius:8px;
 text-decoration:none;
 }
 
-.selfie{
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-margin-top:10px;
-}
-
 </style>
 </head>
 
@@ -105,8 +97,6 @@ margin-top:10px;
 <h3>আপনার Eid Salami Link তৈরি করুন</h3>
 
 <input id="name" placeholder="আপনার নাম">
-
-<input type="file" id="selfie">
 
 <select id="method">
 <option value="Bkash Personal">Bkash Personal</option>
@@ -131,7 +121,6 @@ margin-top:10px;
 
 </div>
 
-
 <div id="visitor" class="container" style="display:none"></div>
 
 </div>
@@ -145,20 +134,7 @@ let number=document.getElementById("number").value
 let method=document.getElementById("method").value
 let msg=document.getElementById("custom").value || document.getElementById("msg").value
 
-let selfieInput=document.getElementById("selfie")
-
-if(!selfieInput.files[0]){
-alert("Selfie add করুন")
-return
-}
-
-let reader=new FileReader()
-
-reader.onload=function(){
-
-let selfie=reader.result
-
-let data=btoa(JSON.stringify({name,number,method,msg,selfie}))
+let data=btoa(JSON.stringify({name,number,method,msg}))
 
 let longLink=location.href.split("?")[0]+"?data="+data
 
@@ -210,10 +186,6 @@ Facebook
 
 }
 
-reader.readAsDataURL(selfieInput.files[0])
-
-}
-
 function copy(){
 
 let copyText=document.getElementById("linkInput")
@@ -225,7 +197,6 @@ document.execCommand("copy")
 alert("Link Copied")
 
 }
-
 
 let urlParams=new URLSearchParams(window.location.search)
 
@@ -240,8 +211,6 @@ document.getElementById("visitor").style.display="block"
 document.getElementById("visitor").innerHTML=`
 
 <h2>🌙 Eid Mubarak 🌙</h2>
-
-<img src="${data.selfie}" class="selfie">
 
 <h3>${data.name}</h3>
 
@@ -266,7 +235,6 @@ document.getElementById("visitor").innerHTML=`
 }
 
 </script>
-
 
 <script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
 
