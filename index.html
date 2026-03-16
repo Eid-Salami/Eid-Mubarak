@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -17,6 +16,7 @@ font-family:'Hind Siliguri',sans-serif;
 margin:0;
 background:url('https://i.imgur.com/dW01cIv.jpg');
 background-size:cover;
+background-position:center;
 background-attachment:fixed;
 color:white;
 text-align:center;
@@ -35,10 +35,12 @@ background:rgba(255,255,255,0.1);
 padding:20px;
 border-radius:15px;
 backdrop-filter:blur(10px);
+box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
 
 h1{
 color:#FFD700;
+margin-bottom:10px;
 }
 
 input,select,textarea{
@@ -81,6 +83,10 @@ color:white;
 padding:8px 15px;
 border-radius:8px;
 text-decoration:none;
+}
+
+.share a.fb{
+background:#1877F2;
 }
 
 </style>
@@ -136,13 +142,7 @@ let msg=document.getElementById("custom").value || document.getElementById("msg"
 
 let data=btoa(JSON.stringify({name,number,method,msg}))
 
-let longLink=location.href.split("?")[0]+"?data="+data
-
-fetch("https://tinyurl.com/api-create.php?url="+encodeURIComponent(longLink))
-
-.then(res=>res.text())
-
-.then(shortLink=>{
+let link=location.href.split("?")[0]+"?data="+data
 
 let shareText=`🌙 ঈদ মোবারক!
 
@@ -152,7 +152,7 @@ let shareText=`🌙 ঈদ মোবারক!
 
 ধন্যবাদ ও শুভেচ্ছা রইলো।
 
-${shortLink}`
+${link}`
 
 document.getElementById("result").innerHTML=`
 
@@ -160,7 +160,7 @@ document.getElementById("result").innerHTML=`
 
 <b>আপনার Eid Salami Link</b><br><br>
 
-<input value="${shortLink}" id="linkInput">
+<input value="${link}" id="linkInput">
 
 <br><br>
 
@@ -172,7 +172,7 @@ document.getElementById("result").innerHTML=`
 WhatsApp
 </a>
 
-<a href="https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(shareText)}&u=${shortLink}" target="_blank">
+<a class="fb" href="https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(shareText)}&u=${link}" target="_blank">
 Facebook
 </a>
 
@@ -181,8 +181,6 @@ Facebook
 </div>
 
 `
-
-})
 
 }
 
@@ -236,12 +234,5 @@ document.getElementById("visitor").innerHTML=`
 
 </script>
 
-<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
-
-<script async="async" data-cfasync="false" src="https://sturgeonvelocity.com/b5662ff1d1603e73ba82848872d95bbc/invoke.js"></script>
-
-<div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
-
 </body>
 </html>
-```
