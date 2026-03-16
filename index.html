@@ -1,85 +1,95 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Eid Salami Link</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Eid Salami Link Generator</title>
 
 <style>
 
 body{
 margin:0;
-font-family:'Hind Siliguri',sans-serif;
-background:url("https://images.unsplash.com/photo-1591608513299-1b7f74c3a12b") center/cover no-repeat fixed;
+font-family:sans-serif;
+background:url('https://i.imgur.com/dW01cIv.jpg');
+background-size:cover;
+background-position:center;
 color:white;
 text-align:center;
 }
 
-.container{
-max-width:420px;
-margin:auto;
+.overlay{
+background:rgba(0,0,0,0.6);
+min-height:100vh;
 padding:20px;
-background:rgba(0,0,0,.6);
-border-radius:15px;
-margin-top:40px;
 }
 
-.title{
-font-size:28px;
+h1{
+font-size:40px;
 color:#FFD700;
+text-shadow:0 0 10px gold;
+}
+
+.formbox{
+background:rgba(255,255,255,0.1);
+padding:20px;
+border-radius:15px;
+max-width:450px;
+margin:auto;
+backdrop-filter:blur(5px);
 }
 
 input,select,textarea{
 width:100%;
 padding:10px;
-margin:6px 0;
-border-radius:8px;
+margin:8px 0;
 border:none;
+border-radius:8px;
 }
 
 button{
-width:100%;
-padding:12px;
-margin-top:8px;
+background:#00c853;
 border:none;
-border-radius:10px;
-background:#FFD700;
-font-weight:bold;
+padding:12px;
+color:white;
+font-size:16px;
+border-radius:8px;
 cursor:pointer;
 }
 
-.copy{background:#ff9800;color:white;}
-.share{background:#25D366;color:white;}
+button:hover{
+background:#00e676;
+}
 
-.photo{
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
+.result{
+margin-top:20px;
+background:#00000080;
+padding:15px;
+border-radius:10px;
+}
+
+.copybtn{
+background:#ff9800;
 margin-top:10px;
 }
 
-.numberCard{
-background:#ffffff20;
-padding:12px;
-border-radius:10px;
-margin:10px 0;
+.share{
+margin-top:10px;
 }
 
-.money{
-position:fixed;
-top:-20px;
+.banner{
 font-size:22px;
-animation:fall 6s linear infinite;
+margin-bottom:10px;
+color:#fff;
 }
 
-@keyframes fall{
-0%{transform:translateY(-50px);}
-100%{transform:translateY(110vh);}
+.confetti{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
 }
 
 </style>
@@ -87,140 +97,123 @@ animation:fall 6s linear infinite;
 
 <body>
 
-<div class="container" id="main">
+<div class="overlay">
 
-<h2 class="title">🌙 Eid Salami Link</h2>
+<h1>🌙 Eid Mubarak</h1>
 
-<input id="name" placeholder="আপনার নাম">
+<div class="banner">
+💚 Eid Salami Link Generate করুন 💚
+</div>
 
-<input id="number" placeholder="bKash / Nagad নাম্বার">
+<div class="formbox">
+
+<input id="name" placeholder="আপনার নাম লিখুন">
+
+<input type="file" id="selfie">
 
 <select id="method">
-<option>bKash</option>
-<option>Nagad</option>
+<option value="Bkash">Bkash Personal</option>
+<option value="Nagad">Nagad Personal</option>
 </select>
 
-<input type="file" id="photo">
+<input id="number" placeholder="Bkash / Nagad Number">
 
-<textarea id="msg" placeholder="Eid message"></textarea>
+<select id="messageSelect"></select>
 
-<button onclick="generate()">🎉 Link Generate</button>
+<textarea id="customMsg" placeholder="নিজের মেসেজ লিখতে চাইলে এখানে লিখুন"></textarea>
 
-<div id="result"></div>
+<button onclick="generateLink()">🎁 Link Generate</button>
+
+<div class="result" id="result" style="display:none">
+
+<p id="showLink"></p>
+
+<button class="copybtn" onclick="copyLink()">📋 Copy Link</button>
+
+<div class="share">
+<a id="messenger" target="_blank">Messenger</a> |
+<a id="whatsapp" target="_blank">WhatsApp</a>
+</div>
+
+</div>
+
+</div>
+
+<br><br>
+
+<!-- ADS -->
+<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
+<script async="async" data-cfasync="false" src="https://sturgeonvelocity.com/b5662ff1d1603e73ba82848872d95bbc/invoke.js"></script>
+<div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
 
 </div>
 
 <script>
 
-let generatedLink="";
+const funnyMessages=[
+"আজ ঈদের দিন 😍 সালামি না দিলে রাগ করবো 😜",
+"ঈদ মোবারক! সালামি পাঠান দ্রুত 💰",
+"ভালবাসা দিবেন পরে, আগে সালামি দিন 😁",
+"ঈদের দিনে টাকা দিলে সওয়াব বেশি 😎",
+"আজকে সালামি দিলে সারা বছর দোয়া পাবেন 🤲",
+"খালি ঈদ মোবারক বললে হবে না 😏",
+"ঈদের মিষ্টি খাবো কিন্তু টাকা আপনার 😁",
+"সালামি পাঠান না হলে মন খারাপ করবো 😜",
+"টাকা কম হলেও সমস্যা নাই 💸",
+"ঈদের খুশি বাড়াতে সালামি দিন 😍",
+"ঈদ মোবারক 💚 সালামি অপেক্ষায় আছি",
+"আজকে না দিলে কবে দিবেন 😜",
+"সালামি পাঠালে আল্লাহ খুশি 😇",
+"মিষ্টির দাম বেশি তাই সালামি চাই 😁",
+"ঈদের দিনে টাকা দিলে দোয়া পাবেন 🤲",
+"একটু সালামি দিন প্লিজ 😎",
+"ঈদের আনন্দ ভাগাভাগি করুন 💚",
+"ঈদের দিনে খালি মেসেজ না টাকা দিন 😁",
+"ভাই সালামি না দিলে চলবে না 😜",
+"ঈদের খুশি বাড়াতে সালামি দিন 💸"
+];
 
-function generate(){
+let select=document.getElementById("messageSelect");
+
+funnyMessages.forEach(m=>{
+let opt=document.createElement("option");
+opt.text=m;
+select.add(opt);
+});
+
+function generateLink(){
 
 let name=document.getElementById("name").value;
 let number=document.getElementById("number").value;
 let method=document.getElementById("method").value;
-let msg=document.getElementById("msg").value;
-let photo=document.getElementById("photo").files[0];
 
-if(!name || !number){
-alert("নাম এবং নাম্বার দিন");
-return;
-}
+let msg=document.getElementById("customMsg").value || select.value;
 
-let reader=new FileReader();
+let data=btoa(name+"|"+number+"|"+method+"|"+msg);
 
-reader.onload=function(){
+let link=location.href.split("?")[0]+"?data="+data;
 
-let data=btoa(name+"|"+method+"|"+number+"|"+msg+"|"+reader.result);
+document.getElementById("result").style.display="block";
 
-generatedLink=location.origin+location.pathname+"?d="+data;
+document.getElementById("showLink").innerText=link;
 
-document.getElementById("result").innerHTML=`
+document.getElementById("messenger").href="https://m.me/?link="+link;
 
-<div style="background:#00000080;padding:10px;border-radius:8px">
-${generatedLink}
-</div>
-
-<button class="copy" onclick="copyLink()">Copy Link</button>
-<button class="share" onclick="share()">WhatsApp Share</button>
-
-`;
-
-}
-
-if(photo){reader.readAsDataURL(photo)}
+document.getElementById("whatsapp").href="https://wa.me/?text="+link;
 
 }
 
 function copyLink(){
-navigator.clipboard.writeText(generatedLink);
+
+let text=document.getElementById("showLink").innerText;
+
+navigator.clipboard.writeText(text);
+
 alert("Link Copied");
-}
-
-function share(){
-
-let text="আজ ঈদের দিন 😍\n"+
-"ভালবাসা ও সালাম নিন ❤️\n\n"+
-"আর হ্যাঁ… সালামি না দিলে কিন্তু মন খারাপ করে ফেলবো 😜\n\n"+
-"এইখানে পাঠাতে পারেন 👇\n\n"+
-generatedLink;
-
-window.open("https://wa.me/?text="+encodeURIComponent(text));
 
 }
-
-function loadData(){
-
-let p=new URLSearchParams(location.search).get("d");
-
-if(!p)return;
-
-let d=atob(p).split("|");
-
-document.getElementById("main").innerHTML=`
-
-<img src="${d[4]}" class="photo">
-
-<h2>${d[0]}</h2>
-
-<p>${d[3]}</p>
-
-<div class="numberCard">
-
-💸 Salami পাঠান (${d[1]})
-
-<br><br>
-
-${d[2]}
-
-</div>
-
-`;
-
-}
-
-loadData();
-
-function money(){
-
-let m=document.createElement("div");
-
-m.className="money";
-
-m.style.left=Math.random()*100+"%";
-
-m.innerHTML="💸";
-
-document.body.appendChild(m);
-
-setTimeout(()=>{m.remove()},6000)
-
-}
-
-setInterval(money,800);
 
 </script>
 
 </body>
 </html>
-```
