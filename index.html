@@ -1,272 +1,262 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Salami Request - ঈদ মোবারক!</title>
+    
+    <meta property="og:title" content="আমার ঈদের সালামি কই? 😍">
+    <meta property="og:description" content="ঈদের আনন্দ ভাগাভাগি করি, সালামি দিন এখনই!">
+    <meta property="og:image" content="https://imgur.com/dW01cIv">
 
-<title>Eid Salami Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
 
-<meta name="description" content="Create your own Eid Salami request link and share with friends.">
-<meta property="og:title" content="Eid Mubarak! Send Me Some Salami 😄">
-<meta property="og:description" content="আজ ঈদের দিন 😍 ভালবাসা ও সালাম নিন ❤️">
-<meta property="og:image" content="https://imgur.com/dW01cIv">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: url('https://imgur.com/dW01cIv') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
 
-<style>
+        /* Floating Lantern Animation */
+        .lantern {
+            position: absolute;
+            width: 40px;
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
 
-body{
-font-family:'Hind Siliguri',sans-serif;
-margin:0;
-background:url('https://imgur.com/dW01cIv') center/cover fixed;
-color:white;
-text-align:center;
-}
+        /* Crescent Moon Glow */
+        .moon-glow {
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+            animation: pulse 3s infinite alternate;
+        }
+        @keyframes pulse {
+            from { opacity: 0.8; }
+            to { opacity: 1; transform: scale(1.05); }
+        }
 
-.overlay{
-background:rgba(0,0,0,0.6);
-min-height:100vh;
-padding:20px;
-}
+        .btn-gradient {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
 
-.banner{
-font-size:28px;
-font-weight:bold;
-margin-top:10px;
-color:#ffd700;
-text-shadow:0 0 10px #000;
-}
-
-.intro{
-margin:15px 0;
-font-size:18px;
-}
-
-.container{
-max-width:450px;
-margin:auto;
-background:rgba(255,255,255,0.1);
-padding:20px;
-border-radius:15px;
-backdrop-filter:blur(5px);
-}
-
-input,select,textarea{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:8px;
-border:none;
-}
-
-button{
-background:#ffd700;
-border:none;
-padding:12px;
-border-radius:10px;
-font-weight:bold;
-cursor:pointer;
-width:100%;
-margin-top:10px;
-}
-
-button:hover{
-background:#ffc107;
-}
-
-.selfie{
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-border:3px solid white;
-}
-
-.share{
-margin-top:20px;
-}
-
-.copy{
-background:#00c853;
-color:white;
-}
-
-.whatsapp{
-background:#25D366;
-color:white;
-}
-
-.messenger{
-background:#0084FF;
-color:white;
-}
-
-.eid-decoration{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-pointer-events:none;
-}
-
-.moon{
-position:absolute;
-top:30px;
-right:30px;
-width:80px;
-height:80px;
-background:radial-gradient(circle,#fff,#ccc);
-border-radius:50%;
-box-shadow:0 0 20px white;
-}
-
-.lantern{
-position:absolute;
-width:40px;
-animation:float 6s infinite ease-in-out;
-}
-
-@keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(20px)}
-100%{transform:translateY(0)}
-}
-
-</style>
+        .hidden-section { display: none; }
+    </style>
 </head>
+<body class="min-h-screen text-gray-800">
 
-<body>
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <img src="https://www.svgrepo.com/show/295557/crescent-moon.svg" class="absolute top-10 right-10 w-16 moon-glow" alt="Moon">
+        <img src="https://www.svgrepo.com/show/164947/lantern.svg" class="lantern top-20 left-10 opacity-50">
+        <img src="https://www.svgrepo.com/show/164947/lantern.svg" class="lantern top-60 right-20 opacity-40" style="animation-delay: 2s;">
+    </div>
 
-<div class="eid-decoration">
-<div class="moon"></div>
-<img class="lantern" style="left:20%" src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
-<img class="lantern" style="left:70%" src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
-</div>
+    <div class="flex justify-center my-4">
+        <script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
+    </div>
 
-<div class="overlay">
+    <div class="max-w-md mx-auto p-4 relative z-10">
+        
+        <div class="text-center mb-6">
+            <h1 class="text-4xl font-bold text-yellow-500 drop-shadow-md mb-2">🌙 Eid Mubarak!</h1>
+            <p class="text-lg font-semibold bg-white/80 rounded-full py-1 px-4 inline-block">Send Me Some Salami 😄</p>
+        </div>
 
-<div class="banner">🌙 Eid Mubarak 🌙</div>
+        <div id="generatorSection" class="glass-card p-6 shadow-2xl">
+            <div class="text-center mb-6">
+                <p class="text-gray-700 leading-relaxed">
+                    আজ ঈদের দিন 😍 ভালবাসা ও সালাম নিন ❤️<br>
+                    আর হ্যাঁ… সালামি না দিলে কিন্তু মন খারাপ করে ফেলবো 😜
+                </p>
+            </div>
 
-<div class="intro">
-Eid Mubarak! Send Me Some Salami 😄 <br><br>
-আজ ঈদের দিন 😍 ভালবাসা ও সালাম নিন ❤️ <br>
-আর হ্যাঁ… সালামি না দিলে কিন্তু মন খারাপ করে ফেলবো 😜
-</div>
+            <form id="salamiForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold mb-1">আপনার নাম</label>
+                    <input type="text" id="userName" required class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-yellow-400 outline-none" placeholder="উদাঃ রাহুল">
+                </div>
 
-<div id="generator" class="container">
+                <div>
+                    <label class="block text-sm font-bold mb-1">আপনার একটি সেলফি (URL)</label>
+                    <input type="url" id="userPhoto" class="w-full p-3 rounded-lg border focus:ring-2 focus:ring-yellow-400 outline-none" placeholder="https://image-link.com/photo.jpg">
+                </div>
 
-<h3>আপনার সালামি লিংক তৈরি করুন</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-sm font-bold mb-1">পেমেন্ট মাধ্যম</label>
+                        <select id="paymentType" class="w-full p-3 rounded-lg border outline-none">
+                            <option value="bKash Personal">bKash Personal</option>
+                            <option value="Nagad Personal">Nagad Personal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1">পার্সোনাল নম্বর</label>
+                        <input type="number" id="payNumber" required class="w-full p-3 rounded-lg border outline-none" placeholder="017xxxxxxxx">
+                    </div>
+                </div>
 
-<input id="name" placeholder="আপনার নাম">
+                <div>
+                    <label class="block text-sm font-bold mb-1">সালামি মেসেজ সিলেক্ট করুন</label>
+                    <select id="messageList" class="w-full p-3 rounded-lg border outline-none text-sm">
+                        </select>
+                    <textarea id="customMsg" class="w-full mt-2 p-3 rounded-lg border text-sm outline-none" placeholder="নিজে কিছু লিখতে চাইলে এখানে লিখুন..."></textarea>
+                </div>
 
-<input type="file" id="selfie">
+                <button type="submit" class="w-full btn-gradient text-white font-bold py-4 rounded-xl text-lg uppercase tracking-wide">সালামি লিংক তৈরি করুন 🚀</button>
+            </form>
+        </div>
 
-<select id="payment">
-<option>bKash Personal</option>
-<option>Nagad Personal</option>
-</select>
+        <div id="resultSection" class="glass-card p-6 shadow-2xl hidden-section text-center">
+            <div id="visitorDisplay">
+                <div class="relative inline-block mb-4">
+                    <img id="displayImg" src="https://via.placeholder.com/150" class="w-32 h-32 rounded-full border-4 border-yellow-400 object-cover mx-auto shadow-lg">
+                    <div class="absolute -bottom-2 -right-2 bg-yellow-400 p-2 rounded-full">✨</div>
+                </div>
+                
+                <h2 class="text-2xl font-bold mb-2 text-indigo-800"><span id="displayName"></span> এর সালামি আবদার!</h2>
+                <div class="bg-yellow-50 p-4 rounded-xl italic mb-6 border-l-4 border-yellow-400">
+                    "<span id="displayMsgText"></span>"
+                </div>
 
-<input id="number" placeholder="Payment Number">
+                <div class="bg-white p-4 rounded-xl border-2 border-dashed border-pink-400 mb-6">
+                    <p class="text-sm font-bold text-gray-500 uppercase">সালামি পাঠানোর নম্বর (<span id="displayPayType"></span>)</p>
+                    <p class="text-2xl font-bold text-pink-600 tracking-widest mt-1" id="displayPayNum"></p>
+                </div>
 
-<select id="message">
-<option>ঈদে সালামি না দিলে কিন্তু বন্ধুত্ব শেষ 😜</option>
-<option>আপনার সালামির অপেক্ষায় বসে আছি 😆</option>
-<option>একটা ছোট্ট সালামি দিলে ঈদটা জমে যাবে 😍</option>
-<option>ঈদে সালামি না দিলে কিন্তু কষ্ট পাবো 😢</option>
-<option>ঈদের খুশি বাড়াতে একটা সালামি পাঠান 😁</option>
-<option>বন্ধু একটা সালামি না দিলে চলবে? 😜</option>
-<option>আজ ঈদ, সালামি না দিলে কি চলে? 😆</option>
-</select>
+                <div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
+            </div>
 
-<textarea id="custom" placeholder="নিজের মেসেজ লিখতে পারেন"></textarea>
+            <div id="shareArea" class="hidden-section border-t pt-6">
+                <p class="text-green-600 font-bold mb-3">সাফল্যের সাথে লিংক তৈরি হয়েছে! শেয়ার করুন:</p>
+                <input type="text" id="finalLink" readonly class="w-full p-2 bg-gray-100 rounded text-xs mb-4">
+                
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="copyLink()" class="bg-blue-500 text-white p-2 rounded text-sm">Copy</button>
+                    <button onclick="shareSocial('messenger')" class="bg-blue-600 text-white p-2 rounded text-sm">Messenger</button>
+                    <button onclick="shareSocial('whatsapp')" class="bg-green-500 text-white p-2 rounded text-sm">WhatsApp</button>
+                </div>
+            </div>
 
-<button onclick="generate()">Generate Salami Link</button>
+            <button onclick="window.location.href=window.location.pathname" class="mt-8 text-sm text-gray-500 underline">আপনিও এমন লিংক তৈরি করতে চান? ক্লিক করুন</button>
+        </div>
 
-</div>
+        <div class="mt-8">
+            <script async="async" data-cfasync="false" src="https://sturgeonvelocity.com/b5662ff1d1603e73ba82848872d95bbc/invoke.js"></script>
+        </div>
+    </div>
 
-<div id="result" class="container" style="display:none">
+    <script>
+        const messages = [
+            "ঈদে সালামি না দিলে কিন্তু বন্ধুত্ব শেষ 😜",
+            "আপনার সালামির অপেক্ষায় বসে আছি 😆",
+            "একটা ছোট্ট সালামি দিলে ঈদটা জমে যাবে 😍",
+            "সালামি ছাড়া ঈদ মানেই লবণ ছাড়া তরকারি! 🥘",
+            "সবাই সালামি পায় আমি কেন পাই না? 😭",
+            "কেপটামি বাদ দিয়ে সালামি পাঠান চটজলদি 💸",
+            "বড় হতে চাই না, সারাজীবন সালামি পেতে চাই 👶",
+            "আপনার পকেট খালি করতে আমি আসছি! 🏃‍♂️",
+            "শুভ ঈদ মোবারক! আমাদের ঈদ হোক আনন্দময় ও বরকতময়। ❤️",
+            "আল্লাহ আপনার ও আপনার পরিবারের সকল ইবাদত কবুল করুন। আমীন।"
+        ];
 
-<img id="photo" class="selfie">
+        // Populate Messages
+        const msgSelect = document.getElementById('messageList');
+        messages.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m;
+            opt.textContent = m;
+            msgSelect.appendChild(opt);
+        });
 
-<h2 id="username"></h2>
+        // Form Submission
+        document.getElementById('salamiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                name: document.getElementById('userName').value,
+                photo: document.getElementById('userPhoto').value || 'https://via.placeholder.com/150',
+                payType: document.getElementById('paymentType').value,
+                num: document.getElementById('payNumber').value,
+                msg: document.getElementById('customMsg').value || document.getElementById('messageList').value
+            };
 
-<p id="usermsg"></p>
+            const params = new URLSearchParams(data);
+            const fullLink = window.location.origin + window.location.pathname + '?' + params.toString();
+            
+            document.getElementById('finalLink').value = fullLink;
+            document.getElementById('generatorSection').classList.add('hidden-section');
+            document.getElementById('resultSection').classList.remove('hidden-section');
+            document.getElementById('shareArea').classList.remove('hidden-section');
+            
+            showVisitorData(data);
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        });
 
-<p id="pay"></p>
+        // Check for URL Params (Visitor View)
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if(urlParams.has('name')) {
+                document.getElementById('generatorSection').classList.add('hidden-section');
+                document.getElementById('resultSection').classList.remove('hidden-section');
+                
+                showVisitorData({
+                    name: urlParams.get('name'),
+                    photo: urlParams.get('photo'),
+                    payType: urlParams.get('payType'),
+                    num: urlParams.get('num'),
+                    msg: urlParams.get('msg')
+                });
+                
+                // Trigger particles on load for visitor
+                setTimeout(() => {
+                    confetti({ particleCount: 100, spread: 60, colors: ['#FFD700', '#ffffff'] });
+                }, 1000);
+            }
+        };
 
-<div class="share">
+        function showVisitorData(data) {
+            document.getElementById('displayName').innerText = data.name;
+            document.getElementById('displayImg').src = data.photo;
+            document.getElementById('displayPayType').innerText = data.payType;
+            document.getElementById('displayPayNum').innerText = data.num;
+            document.getElementById('displayMsgText').innerText = data.msg;
+        }
 
-<input id="link" readonly>
+        function copyLink() {
+            const link = document.getElementById('finalLink');
+            link.select();
+            document.execCommand('copy');
+            alert('লিংক কপি হয়েছে!');
+        }
 
-<button class="copy" onclick="copyLink()">Copy Link</button>
-
-<button class="whatsapp" onclick="shareWhats()">WhatsApp</button>
-
-<button class="messenger" onclick="shareMsg()">Messenger</button>
-
-</div>
-
-<br>
-
-<button onclick="location.href=location.pathname">
-আপনিও একটি সালামি লিংক তৈরি করুন
-</button>
-
-</div>
-
-</div>
-
-<script>
-
-function generate(){
-
-let name=document.getElementById("name").value
-let payment=document.getElementById("payment").value
-let number=document.getElementById("number").value
-let msg=document.getElementById("custom").value || document.getElementById("message").value
-
-let url=location.origin+location.pathname+
-"?user="+encodeURIComponent(name)+
-"&pay="+encodeURIComponent(payment)+
-"&num="+encodeURIComponent(number)+
-"&msg="+encodeURIComponent(msg)
-
-document.getElementById("generator").style.display="none"
-document.getElementById("result").style.display="block"
-
-document.getElementById("username").innerText=name+" এর জন্য সালামি পাঠান ❤️"
-document.getElementById("usermsg").innerText=msg
-document.getElementById("pay").innerText=payment+" : "+number
-document.getElementById("link").value=url
-
-}
-
-function copyLink(){
-let copy=document.getElementById("link")
-copy.select()
-document.execCommand("copy")
-alert("Link Copied")
-}
-
-function shareWhats(){
-let url=document.getElementById("link").value
-window.open("https://wa.me/?text="+encodeURIComponent(url))
-}
-
-function shareMsg(){
-let url=document.getElementById("link").value
-window.open("https://www.facebook.com/sharer/sharer.php?u="+url)
-}
-
-</script>
-
-<!-- Ads Script -->
-
-<script src="https://sturgeonvelocity.com/90/73/c2/9073c2631c16eaba32648763f413d0d2.js"></script>
-
-<script async="async" data-cfasync="false" src="https://sturgeonvelocity.com/b5662ff1d1603e73ba82848872d95bbc/invoke.js"></script>
-
-<div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
-
+        function shareSocial(platform) {
+            const link = encodeURIComponent(document.getElementById('finalLink').value);
+            const text = encodeURIComponent("আমার ঈদের সালামি কই? তাড়াতাড়ি পাঠান! 😍");
+            if(platform === 'whatsapp') {
+                window.open(`https://api.whatsapp.com/send?text=${text}%20${link}`);
+            } else {
+                window.open(`fb-messenger://share/?link=${link}`);
+            }
+        }
+    </script>
 </body>
 </html>
