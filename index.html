@@ -1,7 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Eid Salami Generator</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
@@ -10,53 +13,47 @@
 
 body{
 font-family:'Hind Siliguri',sans-serif;
+margin:0;
 background:url('https://i.imgur.com/dW01cIv.jpg');
 background-size:cover;
 background-attachment:fixed;
-margin:0;
-text-align:center;
 color:white;
+text-align:center;
 }
 
 .overlay{
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.65);
 min-height:100vh;
-padding:30px;
+padding:20px;
 }
 
-h1{
-font-size:40px;
-color:#FFD700;
-animation: glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{text-shadow:0 0 10px gold;}
-to{text-shadow:0 0 25px orange;}
-}
-
-.form-box{
-background:rgba(255,255,255,0.1);
-padding:25px;
-border-radius:15px;
+.container{
 max-width:500px;
 margin:auto;
+background:rgba(255,255,255,0.1);
+padding:20px;
+border-radius:15px;
 backdrop-filter:blur(10px);
 }
 
+h1{
+color:#FFD700;
+}
+
 input,select,textarea{
-width:90%;
+width:95%;
 padding:10px;
-margin:10px;
+margin:8px 0;
 border:none;
 border-radius:8px;
+font-size:15px;
 }
 
 button{
 background:#FFD700;
 color:black;
-padding:12px 25px;
 border:none;
+padding:12px 20px;
 border-radius:10px;
 font-weight:bold;
 cursor:pointer;
@@ -66,16 +63,30 @@ button:hover{
 background:orange;
 }
 
-.link-box{
+.result{
 margin-top:20px;
 background:white;
 color:black;
-padding:10px;
+padding:15px;
 border-radius:10px;
 word-break:break-all;
 }
 
-.share{
+.share a{
+display:inline-block;
+margin:5px;
+background:#25D366;
+color:white;
+padding:8px 15px;
+border-radius:8px;
+text-decoration:none;
+}
+
+.selfie{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
 margin-top:10px;
 }
 
@@ -88,37 +99,41 @@ margin-top:10px;
 
 <h1>🌙 Eid Mubarak 🌙</h1>
 
-<div class="form-box">
+<div id="generator" class="container">
+
+<h3>আপনার Eid Salami Link তৈরি করুন</h3>
 
 <input id="name" placeholder="আপনার নাম">
 
 <input type="file" id="selfie">
 
 <select id="method">
-<option value="bkash">Bkash Personal</option>
-<option value="nagad">Nagad Personal</option>
+<option value="Bkash Personal">Bkash Personal</option>
+<option value="Nagad Personal">Nagad Personal</option>
 </select>
 
 <input id="number" placeholder="Bkash / Nagad Number">
 
-<select id="msgSelect">
+<select id="msg">
 <option>ঈদের সালামি না দিলে কিন্তু মন খারাপ করবো 😜</option>
 <option>আজ ঈদ! সালামি দিলে দোয়া ফ্রি 🤲</option>
-<option>ঈদের খুশি বাড়াতে ছোট্ট একটা সালামি পাঠাতে পারেন 😉</option>
-<option>সালামি দিলে ঈদের আনন্দ দ্বিগুণ হবে 🎉</option>
-<option>আপনার সালামি আমার ঈদের সুখ 😍</option>
+<option>ঈদের খুশি বাড়াতে ছোট্ট একটি সালামি পাঠাতে পারেন 😊</option>
+<option>আপনার সালামি আমার ঈদের আনন্দ দ্বিগুণ করবে 🎉</option>
+<option>ঈদের শুভেচ্ছা রইলো, ইচ্ছা হলে একটি সালামি পাঠাতে পারেন ❤️</option>
 </select>
 
-<textarea id="customMsg" placeholder="নিজের Eid Mubarak Message লিখতে পারেন"></textarea>
+<textarea id="custom" placeholder="নিজের Eid Message লিখতে পারেন"></textarea>
 
 <button onclick="generate()">Link Generate</button>
-
-</div>
 
 <div id="result"></div>
 
 </div>
 
+
+<div id="visitor" class="container" style="display:none"></div>
+
+</div>
 
 <script>
 
@@ -127,19 +142,36 @@ function generate(){
 let name=document.getElementById("name").value
 let number=document.getElementById("number").value
 let method=document.getElementById("method").value
-let msg=document.getElementById("customMsg").value || document.getElementById("msgSelect").value
+let msg=document.getElementById("custom").value || document.getElementById("msg").value
 
-let data=btoa(name+"|"+number+"|"+method+"|"+msg)
+let selfieInput=document.getElementById("selfie")
+let reader=new FileReader()
+
+reader.onload=function(){
+
+let selfie=reader.result
+
+let data=btoa(JSON.stringify({name,number,method,msg,selfie}))
 
 let link=location.href.split("?")[0]+"?data="+data
 
+let shareText=`🌙 ঈদ মোবারক!
+
+আশা করি আপনি ও আপনার পরিবার ভালো আছেন।
+
+ঈদের আনন্দ ভাগাভাগি করার জন্য যদি ইচ্ছা হয় তাহলে ছোট্ট একটি ঈদ সালামি পাঠাতে পারেন ❤️
+
+ধন্যবাদ ও শুভেচ্ছা রইলো।
+
+${link}`
+
 document.getElementById("result").innerHTML=`
 
-<div class="link-box">
+<div class="result">
 
 <b>আপনার Eid Salami Link</b><br><br>
 
-<input value="${link}" id="linkInput" style="width:90%">
+<input value="${link}" id="linkInput">
 
 <br><br>
 
@@ -147,8 +179,13 @@ document.getElementById("result").innerHTML=`
 
 <div class="share">
 
-<a href="https://m.me/?link=${link}" target="_blank">Messenger</a> |
-<a href="https://wa.me/?text=${link}" target="_blank">WhatsApp</a>
+<a href="https://wa.me/?text=${encodeURIComponent(shareText)}" target="_blank">
+WhatsApp
+</a>
+
+<a href="https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(shareText)}&u=${link}" target="_blank">
+Facebook
+</a>
 
 </div>
 
@@ -158,11 +195,59 @@ document.getElementById("result").innerHTML=`
 
 }
 
+reader.readAsDataURL(selfieInput.files[0])
+
+}
+
 function copy(){
+
 let copyText=document.getElementById("linkInput")
+
 copyText.select()
+
 document.execCommand("copy")
+
 alert("Link Copied")
+
+}
+
+
+let urlParams=new URLSearchParams(window.location.search)
+
+if(urlParams.get("data")){
+
+document.getElementById("generator").style.display="none"
+
+let data=JSON.parse(atob(urlParams.get("data")))
+
+document.getElementById("visitor").style.display="block"
+
+document.getElementById("visitor").innerHTML=`
+
+<h2>🌙 Eid Mubarak 🌙</h2>
+
+<img src="${data.selfie}" class="selfie">
+
+<h3>${data.name}</h3>
+
+<p>${data.msg}</p>
+
+<h3>${data.method}</h3>
+
+<h2>${data.number}</h2>
+
+<p>এই নাম্বারে Eid Salami পাঠাতে পারেন ❤️</p>
+
+<br>
+
+<button onclick="window.location.href=window.location.origin+window.location.pathname">
+
+আপনিও একটি Salami Link বানান
+
+</button>
+
+`
+
 }
 
 </script>
@@ -174,6 +259,6 @@ alert("Link Copied")
 
 <div id="container-b5662ff1d1603e73ba82848872d95bbc"></div>
 
-
 </body>
 </html>
+```
